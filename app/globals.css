@@ -149,7 +149,8 @@
 
 /* Premium smooth scrolling */
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth will conflict with Lenis */
+  scroll-behavior: auto;
 }
 
 /* Custom perspective utility */

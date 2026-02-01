@@ -49,8 +49,8 @@ export function AppleStory() {
         <motion.p
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-4xl md:text-6xl text-center max-w-4xl text-[#6E6E73]"
         >
           I design systems that scale.
@@ -64,8 +64,8 @@ export function AppleStory() {
         <motion.img
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
           src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
           className="w-[60vw] rounded-2xl shadow-2xl"
         />
@@ -76,8 +76,8 @@ export function AppleStory() {
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 1.2 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-[8vw] font-light text-center"
         >
           Engineering.

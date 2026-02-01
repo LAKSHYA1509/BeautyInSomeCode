@@ -6,9 +6,14 @@ import { useEffect } from "react"
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.08,          // smoothness (0–1)
-      wheelMultiplier: 1,  // scroll speed
-      touchMultiplier: 1.2,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
     })
 
     function raf(time: number) {
@@ -18,7 +23,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     requestAnimationFrame(raf)
 
-    return () => lenis.destroy()
+    // Log for debugging (optional) - if user is tech-savvy we can mention it
+    // console.log('Lenis initialized')
+
+    return () => {
+      lenis.destroy()
+    }
   }, [])
 
   return <>{children}</>

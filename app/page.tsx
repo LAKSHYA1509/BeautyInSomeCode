@@ -3,16 +3,17 @@
 import dynamic from "next/dynamic"
 import { useState } from "react"
 
-import { LoadingScreen } from "@/components/loading-screen"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Navigation } from "@/components/navigation"
 import { AboutSection } from "@/components/about"
-import { ProjectsSection } from "@/components/projects"
 import { AchievementsSection } from "@/components/achievements"
+import { AppleStory } from "@/components/apple-story"
+import { BlogSection } from "@/components/blog"
 import { ContactSection } from "@/components/contact"
 import { Footer } from "@/components/footer"
+import { LoadingScreen } from "@/components/loading-screen"
+import { Navigation } from "@/components/navigation"
+import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
-import { AppleStory } from "@/components/apple-story"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const HeroSection = dynamic(
   () => import("@/components/hero").then(m => m.HeroSection),
@@ -41,6 +42,7 @@ export default function HomePage() {
             <ProjectsSection />
             <AchievementsSection />
             <ContactSection />
+            <BlogSection />
           </main>
 
           <Footer />
