@@ -50,9 +50,9 @@ export default function HomePage() {
             <TestimonialsSection />
             <AwardsSection />
             <PhilosophySection />
-            <ContactSection />
             <LifePhotosMarquee />
             <BlogSection />
+            <ContactSection />
           </main>
 
           <Footer />

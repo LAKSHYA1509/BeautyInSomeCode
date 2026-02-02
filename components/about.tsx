@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
+import Image from "next/image"
 import { useRef } from "react"
 
 const highlights = [
@@ -124,6 +125,8 @@ export function AboutSection() {
 
               {/* Glassmorphism overlay */}
               <div className="absolute inset-0 backdrop-blur-sm bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
+              <Image src="https://res.cloudinary.com/dgmrrew73/image/upload/v1770026507/_MG_1193_y6h7kx.jpg" alt="Hero" fill className="object-cover" />
+              <Image src="https://res.cloudinary.com/dgmrrew73/image/upload/v1770026507/_MG_1193_y6h7kx.jpg" alt="Hero" fill className="object-cover" />
             </div>
 
             {/* Floating elements */}

@@ -11,93 +11,178 @@ export function AppleStory() {
     offset: ["start start", "end end"],
   })
 
-  const scaleText = useTransform(scrollYProgress, [0, 0.2], [1, 1.2])
-  const fade = useTransform(scrollYProgress, [0, 0.15], [1, 0])
-
-  const yParallax = useTransform(scrollYProgress, [0.15, 0.4], [0, -150])
+  const yParallax = useTransform(scrollYProgress, [0, 0.5], [0, -200])
+  const imageScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.1])
 
   return (
-    <section ref={ref} className="relative bg-[#0B0B0F] text-white">
+    <section ref={ref} className="relative bg-gradient-to-b from-black via-[#0F0F14] to-[#0B0B0F] text-white">
 
-      {/* SCENE 1 — BIG INTRO */}
-      <div className="min-h-screen flex items-center justify-center py-20">
-        <motion.h1
-          style={{ scale: scaleText, opacity: fade }}
-          className="text-[10vw] font-light tracking-tight text-center px-4"
-        >
-          नमस्कार,
-          <br />मैं लक्ष्य
-        </motion.h1>
-      </div>
-
-      {/* SCENE 2 — PINNED IMAGE WITH CONTENT */}
+      {/* SCENE 1 — PINNED IMAGE WITH CONTENT */}
       <div className="relative">
 
         <div className="sticky top-0 h-screen flex items-center justify-center bg-[#0B0B0F]">
 
-          <motion.img
-            style={{ y: yParallax }}
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
-            className="w-[70vw] max-w-5xl rounded-2xl shadow-2xl object-cover"
-            alt="Workspace collaboration"
-          />
+          <motion.div
+            style={{ y: yParallax, scale: imageScale }}
+            className="relative"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=800&fit=crop"
+              className="w-[75vw] max-w-6xl rounded-3xl shadow-[0_25px_100px_-12px_rgba(0,0,0,0.8)] object-cover"
+              alt="Backend architecture and code"
+            />
+            {/* Image overlay glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-purple-500/20 rounded-3xl mix-blend-overlay" />
+          </motion.div>
 
         </div>
 
         {/* Content scrolls on top */}
-        <div className="relative bg-[#0B0B0F] py-24 px-4">
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
+        <div className="relative bg-gradient-to-b from-[#0B0B0F] via-[#0F0F14] to-[#0B0B0F] py-32 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="text-2xl md:text-4xl text-center max-w-3xl mx-auto text-[#6E6E73] leading-relaxed"
+            transition={{ duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center max-w-4xl mx-auto"
           >
-            I design systems that scale.
-            <br />
-            <span className="text-white">I build ideas that last.</span>
-          </motion.p>
+            <p className="text-3xl md:text-5xl lg:text-6xl leading-tight font-light mb-8">
+              <span className="text-[#86868B]">Building </span>
+              <span className="bg-gradient-to-r from-white via-white to-primary bg-clip-text text-transparent">backend systems</span>
+            </p>
+            <p className="text-3xl md:text-5xl lg:text-6xl leading-tight font-light">
+              <span className="text-[#86868B]">that power </span>
+              <span className="bg-gradient-to-r from-primary via-purple-400 to-white bg-clip-text text-transparent">millions.</span>
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      {/* SCENE 3 — PRODUCT STYLE IMAGE */}
-      <div className="py-24 px-4 flex items-center justify-center">
-        <motion.img
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
-          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-          className="w-[60vw] max-w-4xl rounded-2xl shadow-2xl object-cover"
-          alt="Development workspace"
-        />
+      {/* SCENE 2 — TECHNICAL EXPERTISE */}
+      <div className="py-32 px-4 flex items-center justify-center relative">
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent" />
+
+        <motion.div
+          initial={{ scale: 0.85, opacity: 0, rotateY: 15 }}
+          whileInView={{ scale: 1, opacity: 1, rotateY: 0 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.4, 0.25, 1] }}
+          viewport={{ once: true, margin: "-150px" }}
+          className="relative"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop"
+            className="w-[65vw] max-w-5xl rounded-3xl shadow-[0_35px_120px_-15px_rgba(139,92,246,0.4)] object-cover"
+            alt="Clean code and architecture"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent rounded-3xl" />
+        </motion.div>
+      </div>
+
+      {/* SCENE 3 — WORKFLOW */}
+      <div className="py-32 px-4 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-20"
+          >
+            <p className="text-3xl md:text-5xl leading-tight font-light">
+              <span className="text-[#86868B]">From </span>
+              <span className="text-white">Spring Boot microservices</span>
+              <span className="text-[#86868B]"> to </span>
+              <span className="text-white">distributed systems</span>
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative aspect-video rounded-2xl overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&h=600&fit=crop"
+                className="w-full h-full object-cover"
+                alt="System design"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-6">
+                <h3 className="text-2xl font-light">System Design</h3>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative aspect-video rounded-2xl overflow-hidden"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=600&fit=crop"
+                className="w-full h-full object-cover"
+                alt="Database optimization"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-6">
+                <h3 className="text-2xl font-light">Data Architecture</h3>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* SCENE 4 — AUTHORITY */}
-      <div className="py-28 px-4 flex items-center justify-center">
+      <div className="py-40 px-4 flex items-center justify-center relative">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center"
+          transition={{ duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
+          viewport={{ once: true, margin: "-150px" }}
+          className="text-center relative z-10"
         >
-          <h2 className="text-6xl md:text-8xl font-light mb-4">
-            Engineering.
-          </h2>
-          <h2 className="text-6xl md:text-8xl font-light text-[#C9A962]">
-            Creativity.
-          </h2>
+          <div className="mb-16">
+            <motion.h2
+              className="text-7xl md:text-9xl font-extralight mb-6 tracking-tight"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <span className="bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
+                Backend.
+              </span>
+            </motion.h2>
+            <motion.h2
+              className="text-7xl md:text-9xl font-extralight tracking-tight"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <span className="bg-gradient-to-r from-[#C9A962] via-[#D4AF37] to-[#C9A962] bg-clip-text text-transparent">
+                Excellence.
+              </span>
+            </motion.h2>
+          </div>
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-lg text-[#888888] mt-12 max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="text-xl md:text-2xl text-[#86868B] mt-16 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            Crafting digital experiences with precision and purpose.
+            Architecting robust{" "}
+            <span className="text-white">Java applications</span> with{" "}
+            <span className="text-white">scalability</span> at the core.
           </motion.p>
         </motion.div>
+
+        {/* Ambient glow */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-[#C9A962]/10 via-transparent to-transparent blur-3xl pointer-events-none" />
       </div>
 
     </section>
