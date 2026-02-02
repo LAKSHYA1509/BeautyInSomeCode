@@ -1,8 +1,8 @@
 "use client"
 
 import { AnimatePresence, motion } from "framer-motion"
-import { useEffect, useState } from "react"
 import { ArrowDownRight } from "lucide-react"
+import { useEffect, useState } from "react"
 
 const snapshots = [
   "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2000&auto=format&fit=crop",
@@ -40,7 +40,7 @@ export function Hero({ onComplete }: HeroProps) {
       clearTimeout(expandTimer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) 
+  }, [])
   // ^^^ THE FIX IS HERE: We pass an empty array [] so it NEVER runs again, 
   // even if the parent component updates.
 
@@ -57,7 +57,7 @@ export function Hero({ onComplete }: HeroProps) {
 
   return (
     <section className="relative h-screen w-full bg-[#0D0D0D] overflow-hidden text-[#Eaeaea] z-0">
-      
+
       {/* LAYER 1: THE DYNAMIC IMAGE BOX */}
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <motion.div
@@ -65,10 +65,10 @@ export function Hero({ onComplete }: HeroProps) {
           initial={{ width: 0, height: 0, borderRadius: "20px" }}
           animate={
             phase === "initial" ? { width: 0, height: 0 } :
-            phase === "split" ? { width: "320px", height: "200px", borderRadius: "20px" } : 
-            { width: "100%", height: "100%", borderRadius: "0px" }
+              phase === "split" ? { width: "280px", height: "180px", borderRadius: "16px" } :
+                { width: "100%", height: "100%", borderRadius: "0px" }
           }
-          transition={{ duration: 1.2, ease: [0.83, 0, 0.17, 1] }} 
+          transition={{ duration: 1.2, ease: [0.83, 0, 0.17, 1] }}
           className="relative overflow-hidden"
         >
           <AnimatePresence mode="popLayout">
@@ -88,34 +88,40 @@ export function Hero({ onComplete }: HeroProps) {
 
       {/* LAYER 2: THE TEXT (LAKSHYA) */}
       <div className="absolute inset-0 z-20 pointer-events-none">
-        <motion.div 
+        <motion.div
           layout
-          className={`flex w-full h-full transition-all duration-1000 ${
-            phase === "expanded" 
-              ? "items-end justify-start p-10 md:p-14 pb-12" 
-              : "items-center justify-center"          
-          }`}
+          className={`flex w-full h-full transition-all duration-1000 ${phase === "expanded"
+              ? "items-end justify-start p-4 sm:p-8 md:p-12 lg:p-16 pb-6 sm:pb-8 md:pb-12"
+              : "items-center justify-center px-4"
+            }`}
         >
-          <motion.div layout className="flex items-center gap-0">
-            <motion.h1 
+          <motion.div
+            layout
+            className="flex flex-row flex-nowrap items-center gap-0 whitespace-nowrap"
+          >
+            <motion.h1
               layout
               className={`font-bold leading-none tracking-tighter mix-blend-difference
-                ${phase === "expanded" ? "text-[14vw]" : "text-8xl md:text-9xl"}
+                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-6xl sm:text-7xl md:text-8xl lg:text-9xl"}
               `}
             >
               LAK
             </motion.h1>
-            
-            <motion.div 
+
+            <motion.div
               layout
-              animate={{ width: phase === "split" ? 340 : 0 }}
+              animate={{
+                width: phase === "split" ? 300 : 0,
+                height: phase === "split" ? 0 : "auto"
+              }}
               transition={{ duration: 1, ease: [0.83, 0, 0.17, 1] }}
+              className="hidden sm:block"
             />
 
-            <motion.h1 
+            <motion.h1
               layout
               className={`font-bold leading-none tracking-tighter mix-blend-difference
-                ${phase === "expanded" ? "text-[14vw]" : "text-8xl md:text-9xl"}
+                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-6xl sm:text-7xl md:text-8xl lg:text-9xl"}
               `}
             >
               SHYA
@@ -127,22 +133,22 @@ export function Hero({ onComplete }: HeroProps) {
       {/* LAYER 3: THE HERO DETAILS */}
       <AnimatePresence>
         {phase === "expanded" && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="absolute top-0 left-0 w-full h-full z-30 pointer-events-none flex justify-between p-10 md:p-14"
+            className="absolute top-0 left-0 w-full h-full z-30 pointer-events-none flex justify-between p-4 sm:p-6 md:p-10 lg:p-14"
           >
-            <div className="ml-auto text-right text-xs md:text-sm font-mono uppercase tracking-widest text-white/80">
-              <p>Java Developer</p>
-              <p>Based in India</p>
-              <p className="text-green-400 mt-2">● Available for work</p>
+            <div className="ml-auto text-right text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-wider sm:tracking-widest text-white/80">
+              <p className="hidden sm:block">Java Developer</p>
+              <p className="hidden sm:block">Based in India</p>
+              <p className="text-green-400 mt-1 sm:mt-2">● Available</p>
             </div>
 
-            <div className="absolute bottom-14 right-14">
-                <div className="p-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm animate-bounce">
-                    <ArrowDownRight className="text-white w-6 h-6" />
-                </div>
+            <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 right-6 sm:right-10 md:right-14">
+              <div className="p-2 sm:p-3 md:p-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm animate-bounce">
+                <ArrowDownRight className="text-white w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              </div>
             </div>
           </motion.div>
         )}

@@ -1,6 +1,6 @@
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Award, Star, Trophy } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const awards = [
   {
@@ -64,13 +64,13 @@ const AwardsSection = () => {
   return (
     <section
       ref={ref}
-      className="py-24 md:py-32 bg-gradient-to-b from-background to-surface/50 relative overflow-hidden"
+      className="py-16 sm:py-24 md:py-32 bg-gradient-to-b from-background to-surface/50 relative overflow-hidden"
     >
       {/* Decorative background */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-3xl" />
 
-      {/* Floating Certificate */}
+      {/* Floating Certificate - Hidden on mobile */}
       <AnimatePresence>
         {hoveredIndex !== null && (
           <motion.div
@@ -87,9 +87,9 @@ const AwardsSection = () => {
               stiffness: 260,
               damping: 25,
             }}
-            className="fixed top-0 left-0 pointer-events-none z-[9999]"
+            className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
           >
-            <div className="w-96 h-64 rounded-2xl overflow-hidden border-2 border-primary/50 shadow-2xl shadow-primary/30 backdrop-blur-xl bg-background/90">
+            <div className="w-80 lg:w-96 h-56 lg:h-64 rounded-2xl overflow-hidden border-2 border-primary/50 shadow-2xl shadow-primary/30 backdrop-blur-xl bg-background/90">
               <img
                 src={awards[hoveredIndex].certificateUrl}
                 alt="Certificate Preview"
@@ -106,26 +106,26 @@ const AwardsSection = () => {
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-12 sm:mb-16 md:mb-20"
         >
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-4 block">
+          <span className="text-primary text-xs sm:text-sm font-semibold uppercase tracking-wider mb-3 sm:mb-4 block">
             Recognition
           </span>
 
-          <h2 className="text-5xl md:text-7xl font-bold text-foreground mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 sm:mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text">
             Awards & Honors
           </h2>
 
-          <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-purple-500 rounded-full" />
+          <div className="w-16 sm:w-20 md:w-24 h-1 sm:h-1.5 bg-gradient-to-r from-primary to-purple-500 rounded-full" />
         </motion.div>
 
         {/* Awards List */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {awards.map((award, index) => (
             <motion.div
               key={award.title}
@@ -136,30 +136,30 @@ const AwardsSection = () => {
               onMouseLeave={() => setHoveredIndex(null)}
               className="group relative cursor-pointer"
             >
-              <div className="py-10 px-8 border border-border/50 hover:border-primary/40 rounded-3xl transition-all duration-500 bg-background/50 backdrop-blur-sm hover:bg-surface/80 hover:shadow-2xl hover:shadow-primary/10">
-                <div className="grid md:grid-cols-12 gap-8 items-start">
+              <div className="py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8 border border-border/50 hover:border-primary/40 rounded-2xl sm:rounded-3xl transition-all duration-500 bg-background/50 backdrop-blur-sm hover:bg-surface/80 hover:shadow-2xl hover:shadow-primary/10">
+                <div className="grid md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 items-start">
                   <div className="md:col-span-2">
-                    <span className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-muted/50 to-muted/30 bg-clip-text text-transparent group-hover:from-primary/70 group-hover:to-purple-500/70 transition-all duration-500">
+                    <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-br from-muted/50 to-muted/30 bg-clip-text text-transparent group-hover:from-primary/70 group-hover:to-purple-500/70 transition-all duration-500">
                       {award.year}
                     </span>
                   </div>
 
                   <div className="md:col-span-8">
-                    <div className="flex items-start gap-5">
-                      <div className="p-4 rounded-2xl bg-gradient-to-br from-surface-elevated to-surface group-hover:from-primary/20 group-hover:to-purple-500/20 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
-                        <award.icon className="w-7 h-7 text-primary group-hover:text-purple-500 transition-colors duration-500" />
+                    <div className="flex items-start gap-3 sm:gap-4 md:gap-5">
+                      <div className="p-2.5 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-surface-elevated to-surface group-hover:from-primary/20 group-hover:to-purple-500/20 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 flex-shrink-0">
+                        <award.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary group-hover:text-purple-500 transition-colors duration-500" />
                       </div>
 
-                      <div className="flex-1">
-                        <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300 break-words">
                           {award.title}
                         </h3>
 
-                        <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                        <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed mb-2">
                           {award.description}
                         </p>
 
-                        <p className="text-primary/60 text-sm mt-2 italic">
+                        <p className="text-primary/60 text-xs sm:text-sm mt-2 italic hidden md:block">
                           Hover to view certificate
                         </p>
                       </div>
@@ -167,7 +167,7 @@ const AwardsSection = () => {
                   </div>
 
                   <div className="md:col-span-2 text-right hidden md:block">
-                    <span className="text-7xl font-bold text-muted/10 group-hover:text-muted/20 transition-colors duration-300">
+                    <span className="text-5xl sm:text-6xl md:text-7xl font-bold text-muted/10 group-hover:text-muted/20 transition-colors duration-300">
                       0{index + 1}
                     </span>
                   </div>

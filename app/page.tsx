@@ -13,7 +13,7 @@ import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
 import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
-import { ThemeToggle } from "@/components/theme-toggle"
+// import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
 import TechStackMarquee from "@/components/TechStackMarquee"
@@ -40,7 +40,7 @@ export default function HomePage() {
             >
               <Navigation />
               <div className="absolute top-4 right-4 md:right-8 z-50">
-                 <ThemeToggle />
+                 {/* <ThemeToggle /> */}
               </div>
             </motion.div>
           )}

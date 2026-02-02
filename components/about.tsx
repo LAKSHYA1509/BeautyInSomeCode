@@ -16,9 +16,9 @@ export function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="about" className="relative py-32 md:py-40 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6">
-        <div ref={ref} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <section id="about" className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div ref={ref} className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-24 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -29,7 +29,7 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-block text-sm text-[#C9A962] tracking-[0.2em] uppercase mb-6"
+              className="inline-block text-xs sm:text-sm text-[#C9A962] tracking-[0.2em] uppercase mb-4 sm:mb-6"
             >
               About
             </motion.span>
@@ -38,7 +38,7 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-8 leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-6 sm:mb-8 leading-tight"
             >
               Crafting digital experiences with precision and purpose.
             </motion.h2>
@@ -47,16 +47,16 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-6 text-[#888888] text-lg leading-relaxed"
+              className="space-y-4 sm:space-y-6 text-[#888888] text-base sm:text-lg leading-relaxed"
             >
               <p>
-                I&apos;m a Java Full Stack Developer with a deep passion for building 
-                robust, scalable systems that stand the test of time. My expertise 
+                I&apos;m a Java Full Stack Developer with a deep passion for building
+                robust, scalable systems that stand the test of time. My expertise
                 lies at the intersection of elegant code and efficient architecture.
               </p>
               <p>
-                With a strong foundation in backend development and a keen eye for 
-                system design, I transform complex problems into streamlined solutions 
+                With a strong foundation in backend development and a keen eye for
+                system design, I transform complex problems into streamlined solutions
                 that drive real business value.
               </p>
             </motion.div>
@@ -65,22 +65,22 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-2 gap-6 mt-12"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12"
             >
               {highlights.map((item, index) => (
                 <div
                   key={item.label}
-                  className="group p-4 rounded-xl border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#1A1A1A]/30 transition-all duration-300"
+                  className="group p-3 sm:p-4 rounded-xl border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#1A1A1A]/30 transition-all duration-300"
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                   >
-                    <span className="block text-[#E8E8E8] font-medium mb-1">
+                    <span className="block text-sm sm:text-base text-[#E8E8E8] font-medium mb-1">
                       {item.label}
                     </span>
-                    <span className="text-sm text-[#888888]">
+                    <span className="text-xs sm:text-sm text-[#888888]">
                       {item.description}
                     </span>
                   </motion.div>
@@ -94,13 +94,13 @@ export function AboutSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative"
+            className="relative order-first lg:order-last"
           >
             <div className="relative aspect-square rounded-2xl overflow-hidden">
               {/* Abstract gradient visual */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] via-[#0D0D0D] to-[#1A1A1A]">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-64 h-64">
+                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64">
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -133,12 +133,12 @@ export function AboutSection() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 w-24 h-24 rounded-xl bg-gradient-to-br from-[#8B7EC8]/20 to-transparent backdrop-blur-sm border border-[#8B7EC8]/10"
+              className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl bg-gradient-to-br from-[#8B7EC8]/20 to-transparent backdrop-blur-sm border border-[#8B7EC8]/10"
             />
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 -left-6 w-32 h-32 rounded-xl bg-gradient-to-br from-[#4A6FA5]/20 to-transparent backdrop-blur-sm border border-[#4A6FA5]/10"
+              className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-xl bg-gradient-to-br from-[#4A6FA5]/20 to-transparent backdrop-blur-sm border border-[#4A6FA5]/10"
             />
           </motion.div>
         </div>

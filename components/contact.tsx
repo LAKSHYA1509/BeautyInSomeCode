@@ -3,8 +3,8 @@
 import React from "react"
 
 import { motion, useInView } from "framer-motion"
+import { ExternalLink, Github, Linkedin, Mail } from "lucide-react"
 import { useRef, useState } from "react"
-import { Github, Linkedin, Mail, ExternalLink } from "lucide-react"
 
 const socialLinks = [
   { name: "Email", href: "mailto:lakshya@example.com", icon: Mail },
@@ -36,28 +36,28 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative py-32 md:py-40">
-      <div className="mx-auto max-w-7xl px-6">
-        <div ref={ref} className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+    <section id="contact" className="relative py-16 sm:py-24 md:py-32 lg:py-40">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div ref={ref} className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block text-sm text-[#C9A962] tracking-[0.2em] uppercase mb-4">
+            <span className="inline-block text-xs sm:text-sm text-[#C9A962] tracking-[0.2em] uppercase mb-3 sm:mb-4">
               Contact
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-4 sm:mb-6">
               Let&apos;s build something meaningful.
             </h2>
-            <p className="text-[#888888] text-lg leading-relaxed mb-12 max-w-md">
-              Have an idea or project in mind? I&apos;d love to hear about it. 
+            <p className="text-[#888888] text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 md:mb-12 max-w-md">
+              Have an idea or project in mind? I&apos;d love to hear about it.
               Let&apos;s create something extraordinary together.
             </p>
 
             {/* Social Links */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               {socialLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
@@ -65,12 +65,12 @@ export function ContactSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="group flex items-center gap-3 px-5 py-3 rounded-full border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#1A1A1A]/50 transition-all duration-300"
+                  className="group flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-[#1A1A1A] hover:border-[#2A2A2A] hover:bg-[#1A1A1A]/50 transition-all duration-300"
                   target={link.href.startsWith("mailto") ? undefined : "_blank"}
                   rel="noopener noreferrer"
                 >
-                  <link.icon className="w-4 h-4 text-[#888888] group-hover:text-[#C9A962] transition-colors duration-300" />
-                  <span className="text-sm text-[#888888] group-hover:text-[#E8E8E8] transition-colors duration-300">
+                  <link.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#888888] group-hover:text-[#C9A962] transition-colors duration-300" />
+                  <span className="text-xs sm:text-sm text-[#888888] group-hover:text-[#E8E8E8] transition-colors duration-300">
                     {link.name}
                   </span>
                 </motion.a>
@@ -84,9 +84,9 @@ export function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm text-[#888888] mb-2">
+                <label htmlFor="name" className="block text-xs sm:text-sm text-[#888888] mb-2">
                   Name
                 </label>
                 <input
@@ -95,13 +95,13 @@ export function ContactSection() {
                   required
                   value={formState.name}
                   onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                  className="w-full px-5 py-4 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-sm sm:text-base text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300"
                   placeholder="Your name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm text-[#888888] mb-2">
+                <label htmlFor="email" className="block text-xs sm:text-sm text-[#888888] mb-2">
                   Email
                 </label>
                 <input
@@ -110,13 +110,13 @@ export function ContactSection() {
                   required
                   value={formState.email}
                   onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  className="w-full px-5 py-4 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-sm sm:text-base text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300"
                   placeholder="your@email.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm text-[#888888] mb-2">
+                <label htmlFor="message" className="block text-xs sm:text-sm text-[#888888] mb-2">
                   Message
                 </label>
                 <textarea
@@ -125,7 +125,7 @@ export function ContactSection() {
                   rows={5}
                   value={formState.message}
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                  className="w-full px-5 py-4 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300 resize-none"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-sm sm:text-base text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300 resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -135,7 +135,7 @@ export function ContactSection() {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-[#E8E8E8] text-[#0D0D0D] font-medium rounded-xl hover:bg-[#C9A962] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 sm:py-4 bg-[#E8E8E8] text-[#0D0D0D] font-medium rounded-xl hover:bg-[#C9A962] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 {isSubmitting ? "Sending..." : submitted ? "Message Sent!" : "Send Message"}
               </motion.button>
