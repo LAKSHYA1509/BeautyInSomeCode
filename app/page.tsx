@@ -14,6 +14,11 @@ import { Navigation } from "@/components/navigation"
 import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { ThemeToggle } from "@/components/theme-toggle"
+import AwardsSection from "@/components/AwardsSection"
+import LifePhotosMarquee from "@/components/LifePhotosMarquee"
+import TechStackMarquee from "@/components/TechStackMarquee"
+import TestimonialsSection from "@/components/TestimonialsSection"
+import PhilosophySection from "@/components/PhilosophySection"
 
 const HeroSection = dynamic(
   () => import("@/components/hero").then(m => m.HeroSection),
@@ -39,9 +44,14 @@ export default function HomePage() {
             <HeroSection />
             <AppleStory />
             <AboutSection />
+            <TechStackMarquee />
             <ProjectsSection />
             <AchievementsSection />
+            <TestimonialsSection />
+            <AwardsSection />
+            <PhilosophySection />
             <ContactSection />
+            <LifePhotosMarquee />
             <BlogSection />
           </main>
 
