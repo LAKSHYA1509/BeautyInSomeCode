@@ -19,32 +19,29 @@ export function Hero({ onComplete }: HeroProps) {
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState<"initial" | "split" | "expanded">("initial")
 
-  // 1. MASTER TIMELINE
+  // 1. MASTER TIMELINE (Runs once on mount)
   useEffect(() => {
     // Start Split
     const splitTimer = setTimeout(() => {
       setPhase("split")
-    }, 1200)
+    }, 500)
 
     // Start Expansion
     const expandTimer = setTimeout(() => {
       setPhase("expanded")
-      // Notify parent that loading is done
+      // Notify parent that loading is done after the expansion animation (1.2s) finishes
       setTimeout(() => {
         onComplete?.()
-      }, 1800)
-    }, 4400)
+      }, 1200)
+    }, 3500)
 
     return () => {
       clearTimeout(splitTimer)
       clearTimeout(expandTimer)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) 
-  // ^^^ THE FIX IS HERE: We pass an empty array [] so it NEVER runs again, 
-  // even if the parent component updates.
+  }, [onComplete])
 
-  // 2. IMAGE CYCLING LOGIC
+  // 2. IMAGE CYCLING LOGIC (Only runs when phase is 'split')
   useEffect(() => {
     if (phase !== "split") return
 
@@ -58,7 +55,7 @@ export function Hero({ onComplete }: HeroProps) {
   return (
     <section className="relative h-screen w-full bg-[#0D0D0D] overflow-hidden text-[#Eaeaea] z-0">
       
-      {/* LAYER 1: THE DYNAMIC IMAGE BOX */}
+      {/* --- LAYER 1: THE DYNAMIC IMAGE BOX --- */}
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <motion.div
           layout
@@ -86,7 +83,7 @@ export function Hero({ onComplete }: HeroProps) {
         </motion.div>
       </div>
 
-      {/* LAYER 2: THE TEXT (LAKSHYA) */}
+      {/* --- LAYER 2: THE TEXT (LAKSHYA) --- */}
       <div className="absolute inset-0 z-20 pointer-events-none">
         <motion.div 
           layout
@@ -124,7 +121,7 @@ export function Hero({ onComplete }: HeroProps) {
         </motion.div>
       </div>
 
-      {/* LAYER 3: THE HERO DETAILS */}
+      {/* --- LAYER 3: THE HERO DETAILS --- */}
       <AnimatePresence>
         {phase === "expanded" && (
           <motion.div 

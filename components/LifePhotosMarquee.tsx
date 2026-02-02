@@ -4,55 +4,75 @@ import { motion } from "framer-motion";
 // Life photos with random sizes for organic feel
 const lifePhotos = [
   {
-    src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048466/IMG-20241019-WA0017_nq00gk.jpg",
     width: "w-48",
     height: "h-32"
   },
   {
-    src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&h=400&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048472/20250516_134302_bixayb.jpg",
     width: "w-36",
     height: "h-48"
   },
   {
-    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=300&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048473/20250516_133214_vxiuen.jpg",
     width: "w-56",
-    height: "h-36"
+    height: "h-66"
   },
   {
-    src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=350&h=350&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048471/_MG_6662_v1tbzf.jpg",
     width: "w-40",
     height: "h-40"
   },
   {
-    src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048470/IMG-20251015-WA0041_bzlbzs.jpg",
     width: "w-44",
     height: "h-28"
   },
   {
-    src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=300&h=450&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048470/IMG20250117144715_-_Copy_u49abp.jpg",
     width: "w-32",
     height: "h-52"
   },
   {
-    src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=450&h=300&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048466/_MG_8771_d837mo.jpg",
     width: "w-52",
     height: "h-36"
   },
   {
-    src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=280&h=380&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048466/IMG-20240823-WA0020_d70mxe.jpg",
     width: "w-32",
     height: "h-44"
   },
   {
-    src: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=420&h=280&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048466/IMG-20240823-WA0043_yrbee8.jpg",
     width: "w-48",
     height: "h-32"
   },
   {
-    src: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=320&h-420&fit=crop",
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048465/IMG-20250508-WA0049_tg3l1i.jpg",
     width: "w-36",
     height: "h-48"
   },
+  {
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048465/IMG-20250805-WA0028_kojhll.jpg",
+    width: "w-36",
+    height: "h-48"
+  },
+  {
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048464/IMG-20241019-WA0050_xbz1hp.jpg",
+    width: "w-36",
+    height: "h-48"
+  },
+  {
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048465/IMG-20241019-WA0068_yqergr.jpg",
+    width: "w-36",
+    height: "h-48"
+  },
+  {
+    src: "https://res.cloudinary.com/dgmrrew73/image/upload/v1770048464/IMG-20241116-WA0005_hiv0qx.jpg",
+    width: "w-36",
+    height: "h-48"
+  }
 ];
 
 const LifePhotosMarquee = () => {
@@ -73,7 +93,7 @@ const LifePhotosMarquee = () => {
             Life & Moments
           </span>
           <h2 className="text-5xl md:text-7xl font-bold text-foreground mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text">
-            Capturing Life's Journey
+            See My Life's Journey
           </h2>
           <div className="w-24 h-1.5 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full" />
         </motion.div>

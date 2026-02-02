@@ -1,15 +1,15 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { useState } from "react"
-
+import { motion, AnimatePresence } from "framer-motion"
+import Cursor from "@/components/ui/Cursor" 
+import { Hero } from "@/components/hero"
 import { AboutSection } from "@/components/about"
 import { AchievementsSection } from "@/components/achievements"
 import { AppleStory } from "@/components/apple-story"
 import { BlogSection } from "@/components/blog"
 import { ContactSection } from "@/components/contact"
 import { Footer } from "@/components/footer"
-import { LoadingScreen } from "@/components/loading-screen"
 import { Navigation } from "@/components/navigation"
 import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
@@ -20,45 +20,61 @@ import TechStackMarquee from "@/components/TechStackMarquee"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import PhilosophySection from "@/components/PhilosophySection"
 
-const HeroSection = dynamic(
-  () => import("@/components/hero").then(m => m.HeroSection),
-  { ssr: false }
-)
-
 export default function HomePage() {
-  const [loading, setLoading] = useState(true)
+  // Master state to control visibility of Nav/Scroll
+  const [isLoaded, setIsLoaded] = useState(false)
 
   return (
+    <>
+    <Cursor/>
     <SmoothScroll>
+      <>
+        {/* Only show Navigation & Toggle when loading is complete */}
+        <AnimatePresence>
+          {isLoaded && (
+            <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="fixed top-0 left-0 w-full z-50"
+            >
+              <Navigation />
+              <div className="absolute top-4 right-4 md:right-8 z-50">
+                 <ThemeToggle />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      {loading && (
-        <LoadingScreen onComplete={() => setLoading(false)} />
-      )}
+{/* Hero handles the Loading Animation internally */}
+{/* It calls setIsLoaded(true) when the "Expansion" is finished */}
+<Hero onComplete={() => setIsLoaded(true)} />
 
-      {!loading && (
-        <>
-          <ThemeToggle />
-          <Navigation />
-
-          <main>
-            <HeroSection />
-            <AppleStory />
-            <AboutSection />
-            <TechStackMarquee />
-            <ProjectsSection />
-            <AchievementsSection />
-            <TestimonialsSection />
-            <AwardsSection />
-            <PhilosophySection />
-            <LifePhotosMarquee />
-            <BlogSection />
-            <ContactSection />
-          </main>
-
-          <Footer />
-        </>
-      )}
-
+  {/* Main Content fades in AFTER loading */}
+        <motion.main
+        initial={{ opacity: 0 }}
+          animate={{ opacity: isLoaded ? 1 : 0 }}
+          transition={{ duration: 1 }}
+          >
+          {isLoaded && (
+            <>
+              <AppleStory />
+              <AboutSection />
+              <TechStackMarquee />
+              <ProjectsSection />
+              <AchievementsSection />
+              <TestimonialsSection />
+              <AwardsSection />
+              <PhilosophySection />
+              <LifePhotosMarquee />
+              <BlogSection />
+              <ContactSection />
+              <Footer />
+            </>
+          )}
+        </motion.main>
+      </>
     </SmoothScroll>
+    </>
   )
 }

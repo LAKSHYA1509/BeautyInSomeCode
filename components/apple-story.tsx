@@ -27,7 +27,7 @@ export function AppleStory() {
             className="relative"
           >
             <img
-              src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=800&fit=crop"
+              src="https://res.cloudinary.com/dgmrrew73/image/upload/v1770047445/_MG_1942_t7bm33.jpg"
               className="w-[75vw] max-w-6xl rounded-3xl shadow-[0_25px_100px_-12px_rgba(0,0,0,0.8)] object-cover"
               alt="Backend architecture and code"
             />
@@ -59,24 +59,48 @@ export function AppleStory() {
       </div>
 
       {/* SCENE 2 — TECHNICAL EXPERTISE */}
-      <div className="py-32 px-4 flex items-center justify-center relative">
-        <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent" />
+<div className="py-32 px-4 flex flex-col items-center justify-center relative">
+  {/* Ambient background glow to make the 3D graph "pop" */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent opacity-50" />
 
-        <motion.div
-          initial={{ scale: 0.85, opacity: 0, rotateY: 15 }}
-          whileInView={{ scale: 1, opacity: 1, rotateY: 0 }}
-          transition={{ duration: 1.2, ease: [0.25, 0.4, 0.25, 1] }}
-          viewport={{ once: true, margin: "-150px" }}
-          className="relative"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop"
-            className="w-[65vw] max-w-5xl rounded-3xl shadow-[0_35px_120px_-15px_rgba(139,92,246,0.4)] object-cover"
-            alt="Clean code and architecture"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent rounded-3xl" />
-        </motion.div>
+  <motion.div
+    initial={{ scale: 0.85, opacity: 0, rotateY: 15 }}
+    whileInView={{ scale: 1, opacity: 1, rotateY: 0 }}
+    transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+    viewport={{ once: true, margin: "-150px" }}
+    className="relative group"
+  >
+    {/* The Glass Container Wrapper */}
+    <div className="relative bg-white/[0.02] backdrop-blur-xl border border-white/10 p-4 md:p-10 rounded-[2.5rem] shadow-2xl overflow-hidden max-w-5xl mx-auto">
+      
+      {/* Subtle light streak across the card */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+
+      {/* THE GITHUB 3D IMAGE */}
+      <motion.img 
+        src="https://raw.githubusercontent.com/LAKSHYA1509/LAKSHYA1509/main/profile-3d-contrib/profile-night-view.svg" 
+        alt="GitHub 3D Stats" 
+        className="w-full relative z-10 select-none filter brightness-110"
+        style={{ 
+          // Adding a drop shadow to the SVG itself to give it depth
+          filter: "drop-shadow(0 20px 50px rgba(0,0,0,0.7))" 
+        }}
+      />
+
+      {/* Bottom Status Bar for that "System" feel */}
+      <div className="mt-8 flex justify-between items-center px-4 opacity-40">
+        <div className="flex items-center gap-3">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-[10px] font-mono uppercase tracking-[0.2em]">Contribution_Architecture.sys</span>
+        </div>
+        <span className="text-[10px] font-mono tracking-widest">v2.0.26</span>
       </div>
+    </div>
+
+    {/* Secondary floating glow behind the card */}
+    <div className="absolute -inset-4 bg-primary/10 blur-[80px] -z-10 rounded-full group-hover:bg-primary/20 transition-colors duration-1000" />
+  </motion.div>
+</div>
 
       {/* SCENE 3 — WORKFLOW */}
       <div className="py-32 px-4 relative">
@@ -90,9 +114,9 @@ export function AppleStory() {
           >
             <p className="text-3xl md:text-5xl leading-tight font-light">
               <span className="text-[#86868B]">From </span>
-              <span className="text-white">Spring Boot microservices</span>
+              <span className="text-white">Spring Boot Microservices</span>
               <span className="text-[#86868B]"> to </span>
-              <span className="text-white">distributed systems</span>
+              <span className="text-white">Distributed Systems</span>
             </p>
           </motion.div>
 
@@ -105,7 +129,7 @@ export function AppleStory() {
               className="relative aspect-video rounded-2xl overflow-hidden"
             >
               <img
-                src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&h=600&fit=crop"
+                src="https://res.cloudinary.com/dgmrrew73/image/upload/v1770047961/download_geliue.jpg"
                 className="w-full h-full object-cover"
                 alt="System design"
               />
@@ -122,7 +146,7 @@ export function AppleStory() {
               className="relative aspect-video rounded-2xl overflow-hidden"
             >
               <img
-                src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=600&fit=crop"
+                src="https://res.cloudinary.com/dgmrrew73/image/upload/v1770047967/download_smcy4q.jpg"
                 className="w-full h-full object-cover"
                 alt="Database optimization"
               />
