@@ -19,19 +19,19 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: 'Lakshya Bhardwaj | Full Stack Developer',
-  description: 'Building systems that scale. Ideas that last. Java Full Stack Developer specializing in backend architecture & scalable systems.',
-  keywords: ['Full Stack Developer', 'Java Developer', 'Backend Architecture', 'Scalable Systems', 'Software Engineer'],
-  authors: [{ name: 'Lakshya Bhardwaj' }],
+  title: 'Mohan Kumar Bhardwaj | Procurement Leader',
+  description: 'GM / DGM – Purchase & Strategic Sourcing with 30+ years of experience in Procurement, Supply Chain, and Vendor Development.',
+  keywords: ['Procurement', 'Supply Chain', 'Strategic Sourcing', 'Vendor Development', 'Purchase Manager', 'Mohan Kumar Bhardwaj'],
+  authors: [{ name: 'Mohan Kumar Bhardwaj' }],
   openGraph: {
-    title: 'Lakshya Bhardwaj | Full Stack Developer',
-    description: 'Building systems that scale. Ideas that last.',
+    title: 'Mohan Kumar Bhardwaj | Procurement Leader',
+    description: 'GM / DGM – Purchase & Strategic Sourcing with 30+ years of experience.',
     type: 'website',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0D0D0D',
+  themeColor: '#0a0f1f',
   width: 'device-width',
   initialScale: 1,
 }
@@ -43,11 +43,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark overflow-x-hidden" suppressHydrationWarning>
-      <body className={`${inter.variable} ${geistMono.variable} ${notoSansDevanagari.variable} font-sans antialiased bg-[#0D0D0D] dark:bg-[#0D0D0D] text-[#E8E8E8] transition-colors duration-500 overflow-x-hidden`}>
+      <body className={`${inter.variable} ${geistMono.variable} ${notoSansDevanagari.variable} font-sans antialiased bg-background text-foreground transition-colors duration-500 overflow-x-hidden`}>
         {children}
         <Analytics />
       </body>
     </html>
   )
 }
-

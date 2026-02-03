@@ -3,15 +3,16 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowDownRight } from "lucide-react"
 import { useEffect, useState } from "react"
+import { MOHAN_INFO } from "@/lib/content"
 
 const snapshots = [
-  "/assets/Untitleddesign.gif",
-  "/assets/Untitleddesign.gif",
-  "/assets/Untitleddesign.gif",
-  "/assets/Untitleddesign.gif",
+  "https://placehold.co/1920x1080/1a365d/eaeaea?text=Mohan+Bhardwaj+1",
+  "https://placehold.co/1920x1080/2c5282/eaeaea?text=Mohan+Bhardwaj+2",
+  "https://placehold.co/1920x1080/d69e2e/000000?text=Mohan+Bhardwaj+3",
+  "https://placehold.co/1920x1080/4a5568/eaeaea?text=Mohan+Bhardwaj+4",
 ]
 
-const words = ["DEV", "WRITER", "READER", "ARCHITECT", "LAKSHYA"]
+const words = ["LEADER", "SOURCING", "EXPERT", "STRATEGIST", "MOHAN"]
 
 interface HeroProps {
   onComplete?: () => void
@@ -56,13 +57,13 @@ export function Hero({ onComplete }: HeroProps) {
 
     const interval = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % words.length)
-    }, 5000)
+    }, 4000) // Slightly faster cycling for better engagement
 
     return () => clearInterval(interval)
   }, [phase])
 
   return (
-    <section className="relative h-screen w-full bg-[#0D0D0D] overflow-hidden text-[#Eaeaea]">
+    <section className="relative h-screen w-full bg-background overflow-hidden text-foreground">
 
       {/* LAYER 1: IMAGE BOX */}
       <div className="absolute inset-0 flex items-center justify-center">
@@ -86,9 +87,12 @@ export function Hero({ onComplete }: HeroProps) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: phase === "expanded" ? "brightness(0.5)" : "brightness(1)" }}
+              style={{ filter: phase === "expanded" ? "brightness(0.4)" : "brightness(1)" }}
             />
           </AnimatePresence>
+          {phase === "expanded" && (
+            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+          )}
         </motion.div>
       </div>
 
@@ -113,7 +117,7 @@ export function Hero({ onComplete }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -40 }}
                   transition={{ duration: 0.6 }}
-                  className="font-bold leading-none tracking-tighter mix-blend-difference text-[18vw] sm:text-[16vw] md:text-[14vw]"
+                  className="font-bold leading-none tracking-tighter text-[15vw] sm:text-[13vw] md:text-[11vw] text-foreground mix-blend-overlay opacity-90"
                 >
                   {words[wordIndex]}
                 </motion.h1>
@@ -125,7 +129,7 @@ export function Hero({ onComplete }: HeroProps) {
                   layout
                   className="font-bold mix-blend-difference text-6xl md:text-8xl"
                 >
-                  LAK
+                  MO
                 </motion.h1>
 
                 <motion.div
@@ -138,7 +142,7 @@ export function Hero({ onComplete }: HeroProps) {
                   layout
                   className="font-bold mix-blend-difference text-6xl md:text-8xl"
                 >
-                  SHYA
+                  HAN
                 </motion.h1>
               </>
             )}
@@ -154,17 +158,23 @@ export function Hero({ onComplete }: HeroProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="absolute inset-0 z-30 pointer-events-none flex justify-between p-6 md:p-12"
+            className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-between p-6 md:p-12"
           >
-            <div className="ml-auto text-right text-xs font-mono uppercase text-white/80">
-              <p>Java Developer</p>
-              <p>Based in India</p>
-              <p className="text-green-400 mt-2">● Available</p>
+            <div className="ml-auto text-right text-xs sm:text-sm font-mono uppercase text-muted-foreground bg-background/50 backdrop-blur-sm p-4 rounded-xl border border-border">
+              <p className="text-foreground font-semibold">Procurement Leader</p>
+              <p>{MOHAN_INFO.location}</p>
+              <p className="text-accent mt-2 flex items-center justify-end gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                </span>
+                Available for Consulting
+              </p>
             </div>
 
-            <div className="absolute bottom-10 right-10">
-              <div className="p-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm animate-bounce">
-                <ArrowDownRight className="text-white w-5 h-5" />
+            <div className="absolute bottom-10 right-10 hidden md:block">
+              <div className="p-3 rounded-full border border-border bg-background/10 backdrop-blur-sm animate-bounce">
+                <ArrowDownRight className="text-foreground w-5 h-5" />
               </div>
             </div>
           </motion.div>

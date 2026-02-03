@@ -3,12 +3,13 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { useState } from "react"
+import { MOHAN_INFO } from "@/lib/content"
 
 const navItems = [
   { name: "About", href: "#about" },
-  { name: "Work", href: "#projects" },
+  { name: "Journey", href: "#journey" },
   { name: "Achievements", href: "#achievements" },
-  { name: "Blog", href: "/blogs" },
+  { name: "Insights", href: "#blog" },
   { name: "Contact", href: "#contact" },
 ]
 
@@ -20,15 +21,15 @@ export function Navigation() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className="fixed top-0 left-0 right-0 z-40"
+      className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md border-b border-white/5"
     >
-      <nav className="mx-auto max-w-7xl px-6 py-6">
+      <nav className="mx-auto max-w-7xl px-6 py-4">
         <div className="flex items-center justify-between">
           <Link 
             href="/" 
-            className="text-lg font-medium tracking-wide text-[#E8E8E8] hover:text-[#C9A962] transition-colors duration-300"
+            className="text-lg font-medium tracking-wide text-foreground hover:text-accent transition-colors duration-300"
           >
-            Lakshya Bhardwaj
+            {MOHAN_INFO.name}
           </Link>
 
           {/* Desktop Navigation */}
@@ -42,7 +43,7 @@ export function Navigation() {
               >
                 <Link
                   href={item.href}
-                  className="text-sm text-[#888888] hover:text-[#E8E8E8] transition-colors duration-300"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
                   {item.name}
                 </Link>
@@ -58,15 +59,15 @@ export function Navigation() {
           >
             <motion.span
               animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 6 : 0 }}
-              className="w-6 h-[1px] bg-[#E8E8E8]"
+              className="w-6 h-[1px] bg-foreground"
             />
             <motion.span
               animate={{ opacity: isOpen ? 0 : 1 }}
-              className="w-6 h-[1px] bg-[#E8E8E8]"
+              className="w-6 h-[1px] bg-foreground"
             />
             <motion.span
               animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -6 : 0 }}
-              className="w-6 h-[1px] bg-[#E8E8E8]"
+              className="w-6 h-[1px] bg-foreground"
             />
           </button>
         </div>
@@ -87,7 +88,7 @@ export function Navigation() {
                 <Link
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="block text-lg text-[#888888] hover:text-[#E8E8E8] transition-colors duration-300"
+                  className="block text-lg text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
                   {item.name}
                 </Link>

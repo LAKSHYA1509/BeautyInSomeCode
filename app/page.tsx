@@ -5,24 +5,21 @@ import { motion, AnimatePresence } from "framer-motion"
 import Cursor from "@/components/ui/Cursor" 
 import { Hero } from "@/components/hero"
 import { AboutSection } from "@/components/about"
-import { AchievementsSection } from "@/components/achievements"
-import { AppleStory } from "@/components/apple-story"
-import { BlogSection } from "@/components/blog"
+import { CareerJourney } from "@/components/career-journey"
+import { ProcurementCompetencies } from "@/components/procurement-competencies"
+import { KeyAchievements } from "@/components/key-achievements"
+import { Certifications } from "@/components/certifications"
+import { IndustryRecognition } from "@/components/industry-recognition"
+import TestimonialsSection from "@/components/TestimonialsSection"
+import PhilosophySection from "@/components/PhilosophySection"
+import { ProfessionalGallery } from "@/components/professional-gallery"
+import { InsightsBlog } from "@/components/insights-blog"
 import { ContactSection } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
-import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
-// import { ThemeToggle } from "@/components/theme-toggle"
-import AwardsSection from "@/components/AwardsSection"
-import LifePhotosMarquee from "@/components/LifePhotosMarquee"
-import TechStackMarquee from "@/components/TechStackMarquee"
-import TestimonialsSection from "@/components/TestimonialsSection"
-import PhilosophySection from "@/components/PhilosophySection"
-// import { LifePath } from "@/components/LifePath"
 
 export default function HomePage() {
-  // Master state to control visibility of Nav/Scroll
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (
@@ -30,7 +27,6 @@ export default function HomePage() {
     <Cursor/>
     <SmoothScroll>
       <>
-        {/* Only show Navigation & Toggle when loading is complete */}
         <AnimatePresence>
           {isLoaded && (
             <motion.div
@@ -40,36 +36,29 @@ export default function HomePage() {
             className="fixed top-0 left-0 w-full z-50"
             >
               <Navigation />
-              <div className="absolute top-4 right-4 md:right-8 z-50">
-                 {/* <ThemeToggle /> */}
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-{/* Hero handles the Loading Animation internally */}
-{/* It calls setIsLoaded(true) when the "Expansion" is finished */}
-<Hero onComplete={() => setIsLoaded(true)} />
+        <Hero onComplete={() => setIsLoaded(true)} />
 
-  {/* Main Content fades in AFTER loading */}
         <motion.main
-        initial={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
           transition={{ duration: 1 }}
-          >
+        >
           {isLoaded && (
             <>
-              <AppleStory />
+              <CareerJourney />
               <AboutSection />
-              <TechStackMarquee />
-              <ProjectsSection />
-              <AchievementsSection />
+              <ProcurementCompetencies />
+              <KeyAchievements />
+              <Certifications />
               <TestimonialsSection />
-              <AwardsSection />
+              <IndustryRecognition />
               <PhilosophySection />
-              <LifePhotosMarquee />
-              <BlogSection />
-              {/* <LifePath /> */}
+              <ProfessionalGallery />
+              <InsightsBlog />
               <ContactSection />
               <Footer />
             </>
