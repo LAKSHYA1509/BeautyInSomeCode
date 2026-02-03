@@ -1,29 +1,41 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function AppleStory() {
   const ref = useRef<HTMLDivElement>(null)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 768)
+    checkDesktop()
+    window.addEventListener('resize', checkDesktop)
+    return () => window.removeEventListener('resize', checkDesktop)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end start"],
   })
 
   const yParallax = useTransform(scrollYProgress, [0, 0.5], [0, -200])
   const imageScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.1])
 
   return (
-    <section ref={ref} className="relative bg-gradient-to-b from-black via-[#0F0F14] to-[#0B0B0F] text-white">
+    <section ref={ref}   className="relative bg-gradient-to-b from-black via-[#0F0F14] to-[#0B0B0F] text-white min-h-[200vh]">
 
-      {/* SCENE 1 — PINNED IMAGE WITH CONTENT */}
-      <div className="relative">
+      {/* SCENE 1 — PINNED IMAGE WITH CONTENT (Desktop only sticky) */}
+      <div className="relative md:min-h-[180vh]">
 
-        <div className="sticky top-0 h-screen flex items-center justify-center bg-[#0B0B0F] px-4">
+        {/* Desktop: sticky with parallax, Mobile: normal scroll */}
+        <div className="md:sticky top-0 md:h-screen flex items-center justify-center bg-[#0B0B0F] px-4 py-16 md:py-0">
 
           <motion.div
-            style={{ y: yParallax, scale: imageScale }}
+            style={{
+              y: isDesktop ? yParallax : 0,
+              scale: isDesktop ? imageScale : 1
+            }}
             className="relative w-full"
           >
             <img

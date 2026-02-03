@@ -19,6 +19,7 @@ import LifePhotosMarquee from "@/components/LifePhotosMarquee"
 import TechStackMarquee from "@/components/TechStackMarquee"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import PhilosophySection from "@/components/PhilosophySection"
+// import { LifePath } from "@/components/LifePath"
 
 export default function HomePage() {
   // Master state to control visibility of Nav/Scroll
@@ -68,6 +69,7 @@ export default function HomePage() {
               <PhilosophySection />
               <LifePhotosMarquee />
               <BlogSection />
+              {/* <LifePath /> */}
               <ContactSection />
               <Footer />
             </>

@@ -42,8 +42,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} ${geistMono.variable} ${notoSansDevanagari.variable} font-sans antialiased bg-[#0D0D0D] dark:bg-[#0D0D0D] text-[#E8E8E8] transition-colors duration-500`}>
+    <html lang="en" className="dark overflow-x-hidden" suppressHydrationWarning>
+      <body className={`${inter.variable} ${geistMono.variable} ${notoSansDevanagari.variable} font-sans antialiased bg-[#0D0D0D] dark:bg-[#0D0D0D] text-[#E8E8E8] transition-colors duration-500 overflow-x-hidden`}>
         {children}
         <Analytics />
       </body>

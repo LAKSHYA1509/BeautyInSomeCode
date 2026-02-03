@@ -55,30 +55,30 @@ const TestimonialCard = ({
       transition={{ duration: 0.3 }}
       className="w-full"
     >
-      <div className="card-elevated p-10 md:p-12 relative overflow-hidden border border-primary/20 rounded-3xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group">
+      <div className="card-elevated p-6 sm:p-8 md:p-10 lg:p-12 relative overflow-hidden border border-primary/20 rounded-2xl sm:rounded-3xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 via-purple-500/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-500" />
-        <div className="absolute bottom-0 left-0 w-56 h-56 bg-gradient-to-tr from-purple-500/10 via-primary/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-500" />
+        <div className="absolute top-0 right-0 w-48 sm:w-56 md:w-64 h-48 sm:h-56 md:h-64 bg-gradient-to-br from-primary/10 via-purple-500/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-500" />
+        <div className="absolute bottom-0 left-0 w-40 sm:w-48 md:w-56 h-40 sm:h-48 md:h-56 bg-gradient-to-tr from-purple-500/10 via-primary/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:scale-110 transition-transform duration-500" />
 
         {/* Quote icon */}
-        <Quote className="w-14 h-14 text-primary/40 mb-8 group-hover:text-primary/60 transition-colors duration-300" />
+        <Quote className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-primary/40 mb-6 sm:mb-8 group-hover:text-primary/60 transition-colors duration-300" />
 
         <blockquote className="relative z-10">
-          <p className="text-foreground text-lg md:text-xl leading-relaxed mb-8 font-light">
+          <p className="text-foreground text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8 font-light">
             "{testimonial.quote}"
           </p>
-          <footer className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/30 to-purple-500/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-              <span className="text-primary font-bold text-base">
+          <footer className="flex items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary/30 to-purple-500/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <span className="text-primary font-bold text-sm sm:text-base">
                 {testimonial.author.charAt(0)}
               </span>
             </div>
             <div>
               <cite className="not-italic">
-                <span className="block text-foreground font-semibold text-base mb-1">
+                <span className="block text-foreground font-semibold text-sm sm:text-base mb-1">
                   {testimonial.author}
                 </span>
-                <span className="text-muted-foreground text-sm">
+                <span className="text-muted-foreground text-xs sm:text-sm">
                   {testimonial.role} <span className="text-primary font-medium">@{testimonial.company}</span>
                 </span>
               </cite>
@@ -87,7 +87,7 @@ const TestimonialCard = ({
         </blockquote>
 
         {/* Index indicator */}
-        <div className="absolute top-6 right-8 text-6xl font-bold text-muted/10 group-hover:text-muted/20 transition-colors duration-300">
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-8 text-4xl sm:text-5xl md:text-6xl font-bold text-muted/10 group-hover:text-muted/20 transition-colors duration-300">
           0{index + 1}
         </div>
       </div>
@@ -108,10 +108,10 @@ const TestimonialsSection = () => {
   return (
     <section
       ref={containerRef}
-      className="bg-background relative py-24 md:py-32"
+      className="bg-background relative py-16 sm:py-24 md:py-32 overflow-hidden"
     >
-      {/* Progress bar */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-border z-50">
+      {/* Progress bar - Desktop only */}
+      <div className="hidden md:block sticky top-0 left-0 right-0 h-1 bg-border z-50 mb-12 sm:mb-16 md:mb-20">
         <motion.div
           className="h-full bg-gradient-to-r from-primary via-purple-500 to-primary"
           style={{ width: progressWidth }}
@@ -119,25 +119,25 @@ const TestimonialsSection = () => {
       </div>
 
       {/* Section header */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 mb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-4 block">
+          <span className="text-primary text-xs sm:text-sm font-semibold uppercase tracking-wider mb-3 sm:mb-4 block">
             Testimonials
           </span>
-          <h2 className="text-5xl md:text-7xl font-bold text-foreground mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 sm:mb-6 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text">
             What People Say
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-purple-500 rounded-full" />
+          <div className="w-16 sm:w-20 md:w-24 h-1 sm:h-1.5 bg-gradient-to-r from-primary to-purple-500 rounded-full" />
         </motion.div>
       </div>
 
       {/* Testimonial cards - space-like vertical scroll */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 space-y-8 sm:space-y-10 md:space-y-12 mt-12 sm:mt-16 md:mt-20">
         {testimonials.map((testimonial, index) => (
           <TestimonialCard
             key={testimonial.author}
@@ -153,13 +153,13 @@ const TestimonialsSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center pt-20 pb-8"
+        className="text-center pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8"
       >
         <a
           href="#contact"
-          className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-purple-600 text-white rounded-full font-semibold text-lg hover:scale-105 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300"
+          className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary to-purple-600 text-white rounded-full font-semibold text-base sm:text-lg hover:scale-105 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300"
         >
-          <Mail className="w-5 h-5" />
+          <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
           Get In Touch
         </a>
       </motion.div>

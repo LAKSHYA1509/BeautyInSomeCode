@@ -5,11 +5,13 @@ import { ArrowDownRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const snapshots = [
-  "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?q=80&w=2000&auto=format&fit=crop",
+  "/assets/Untitleddesign.gif",
+  "/assets/Untitleddesign.gif",
+  "/assets/Untitleddesign.gif",
+  "/assets/Untitleddesign.gif",
 ]
+
+
 
 interface HeroProps {
   onComplete?: () => void
@@ -65,7 +67,7 @@ export function Hero({ onComplete }: HeroProps) {
           initial={{ width: 0, height: 0, borderRadius: "20px" }}
           animate={
             phase === "initial" ? { width: 0, height: 0 } :
-              phase === "split" ? { width: "280px", height: "180px", borderRadius: "16px" } :
+              phase === "split" ? { width: "200px", height: "120px", borderRadius: "12px", x: -30 } :
                 { width: "100%", height: "100%", borderRadius: "0px" }
           }
           transition={{ duration: 1.2, ease: [0.83, 0, 0.17, 1] }}
@@ -91,18 +93,18 @@ export function Hero({ onComplete }: HeroProps) {
         <motion.div
           layout
           className={`flex w-full h-full transition-all duration-1000 ${phase === "expanded"
-              ? "items-end justify-start p-4 sm:p-8 md:p-12 lg:p-16 pb-6 sm:pb-8 md:pb-12"
-              : "items-center justify-center px-4"
+            ? "items-end justify-start p-4 sm:p-8 md:p-12 lg:p-16 pb-6 sm:pb-8 md:pb-12"
+            : "items-center justify-center px-4"
             }`}
         >
           <motion.div
             layout
-            className="flex flex-row flex-nowrap items-center gap-0 whitespace-nowrap"
+            className="flex flex-row items-center gap-0"
           >
             <motion.h1
               layout
               className={`font-bold leading-none tracking-tighter mix-blend-difference
-                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-6xl sm:text-7xl md:text-8xl lg:text-9xl"}
+                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"}
               `}
             >
               LAK
@@ -111,17 +113,15 @@ export function Hero({ onComplete }: HeroProps) {
             <motion.div
               layout
               animate={{
-                width: phase === "split" ? 300 : 0,
-                height: phase === "split" ? 0 : "auto"
+                width: phase === "split" ? 180 : 0,
               }}
               transition={{ duration: 1, ease: [0.83, 0, 0.17, 1] }}
-              className="hidden sm:block"
             />
 
             <motion.h1
               layout
               className={`font-bold leading-none tracking-tighter mix-blend-difference
-                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-6xl sm:text-7xl md:text-8xl lg:text-9xl"}
+                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"}
               `}
             >
               SHYA

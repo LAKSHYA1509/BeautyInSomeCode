@@ -1,5 +1,5 @@
-import abstractBg from "@/components/assets/abstract-bg.jpg";
-import workspace from "@/components/assets/workspace.jpg";
+import abstractBg from "@/public/assets/abstract-bg.jpg";
+import workspace from "@/public/assets/workspace.jpg";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";

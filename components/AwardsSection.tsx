@@ -70,7 +70,7 @@ const AwardsSection = () => {
       <div className="absolute top-0 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gradient-to-tl from-purple-500/10 to-transparent rounded-full blur-3xl" />
 
-      {/* Floating Certificate - Hidden on mobile */}
+      {/* Floating Certificate - Now works on mobile with click */}
       <AnimatePresence>
         {hoveredIndex !== null && (
           <motion.div
@@ -106,6 +106,46 @@ const AwardsSection = () => {
         )}
       </AnimatePresence>
 
+      {/* Mobile Certificate Modal */}
+      <AnimatePresence>
+        {hoveredIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setHoveredIndex(null)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 md:hidden"
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="max-w-2xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="rounded-2xl overflow-hidden border-2 border-primary/50 shadow-2xl shadow-primary/30 backdrop-blur-xl bg-background/90">
+                <img
+                  src={awards[hoveredIndex].certificateUrl}
+                  alt="Certificate"
+                  className="w-full h-auto object-contain"
+                />
+                <div className="p-4 flex justify-between items-center">
+                  <span className="text-white font-semibold text-sm">
+                    {awards[hoveredIndex].title}
+                  </span>
+                  <button
+                    onClick={() => setHoveredIndex(null)}
+                    className="px-4 py-2 bg-primary/90 text-white rounded-full text-sm font-semibold"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -134,6 +174,7 @@ const AwardsSection = () => {
               transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
               className="group relative cursor-pointer"
             >
               <div className="py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8 border border-border/50 hover:border-primary/40 rounded-2xl sm:rounded-3xl transition-all duration-500 bg-background/50 backdrop-blur-sm hover:bg-surface/80 hover:shadow-2xl hover:shadow-primary/10">
@@ -159,8 +200,9 @@ const AwardsSection = () => {
                           {award.description}
                         </p>
 
-                        <p className="text-primary/60 text-xs sm:text-sm mt-2 italic hidden md:block">
-                          Hover to view certificate
+                        <p className="text-primary/60 text-xs sm:text-sm mt-2 italic">
+                          <span className="hidden md:inline">Hover</span>
+                          <span className="md:hidden">Tap</span> to view certificate
                         </p>
                       </div>
                     </div>
