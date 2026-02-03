@@ -11,7 +11,7 @@ const snapshots = [
   "/assets/Untitleddesign.gif",
 ]
 
-
+const words = ["DEV", "WRITER", "READER", "ARCHITECT", "LAKSHYA"]
 
 interface HeroProps {
   onComplete?: () => void
@@ -21,32 +21,25 @@ export function Hero({ onComplete }: HeroProps) {
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState<"initial" | "split" | "expanded">("initial")
 
-  // 1. MASTER TIMELINE
-  useEffect(() => {
-    // Start Split
-    const splitTimer = setTimeout(() => {
-      setPhase("split")
-    }, 1200)
+  // ✅ WORD CYCLING STATE
+  const [wordIndex, setWordIndex] = useState(0)
 
-    // Start Expansion
+  // 1️⃣ MASTER TIMELINE
+  useEffect(() => {
+    const splitTimer = setTimeout(() => setPhase("split"), 1200)
+
     const expandTimer = setTimeout(() => {
       setPhase("expanded")
-      // Notify parent that loading is done
-      setTimeout(() => {
-        onComplete?.()
-      }, 1800)
+      setTimeout(() => onComplete?.(), 1800)
     }, 4400)
 
     return () => {
       clearTimeout(splitTimer)
       clearTimeout(expandTimer)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  // ^^^ THE FIX IS HERE: We pass an empty array [] so it NEVER runs again, 
-  // even if the parent component updates.
 
-  // 2. IMAGE CYCLING LOGIC
+  // 2️⃣ IMAGE CYCLING
   useEffect(() => {
     if (phase !== "split") return
 
@@ -57,18 +50,29 @@ export function Hero({ onComplete }: HeroProps) {
     return () => clearInterval(interval)
   }, [phase])
 
-  return (
-    <section className="relative h-screen w-full bg-[#0D0D0D] overflow-hidden text-[#Eaeaea] z-0">
+  // 3️⃣ WORD CYCLING (ONLY AFTER EXPANDED)
+  useEffect(() => {
+    if (phase !== "expanded") return
 
-      {/* LAYER 1: THE DYNAMIC IMAGE BOX */}
-      <div className="absolute inset-0 flex items-center justify-center z-0">
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [phase])
+
+  return (
+    <section className="relative h-screen w-full bg-[#0D0D0D] overflow-hidden text-[#Eaeaea]">
+
+      {/* LAYER 1: IMAGE BOX */}
+      <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           layout
           initial={{ width: 0, height: 0, borderRadius: "20px" }}
           animate={
             phase === "initial" ? { width: 0, height: 0 } :
-              phase === "split" ? { width: "200px", height: "120px", borderRadius: "12px", x: -30 } :
-                { width: "100%", height: "100%", borderRadius: "0px" }
+            phase === "split" ? { width: "200px", height: "120px", borderRadius: "12px", x: -30 } :
+            { width: "100%", height: "100%", borderRadius: "0px" }
           }
           transition={{ duration: 1.2, ease: [0.83, 0, 0.17, 1] }}
           className="relative overflow-hidden"
@@ -88,71 +92,85 @@ export function Hero({ onComplete }: HeroProps) {
         </motion.div>
       </div>
 
-      {/* LAYER 2: THE TEXT (LAKSHYA) */}
+      {/* LAYER 2: TEXT */}
       <div className="absolute inset-0 z-20 pointer-events-none">
         <motion.div
           layout
-          className={`flex w-full h-full transition-all duration-1000 ${phase === "expanded"
-            ? "items-end justify-start p-4 sm:p-8 md:p-12 lg:p-16 pb-6 sm:pb-8 md:pb-12"
-            : "items-center justify-center px-4"
-            }`}
+          className={`flex w-full h-full transition-all duration-1000 ${
+            phase === "expanded"
+              ? "items-end justify-start p-6 md:p-12"
+              : "items-center justify-center"
+          }`}
         >
-          <motion.div
-            layout
-            className="flex flex-row items-center gap-0"
-          >
-            <motion.h1
-              layout
-              className={`font-bold leading-none tracking-tighter mix-blend-difference
-                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"}
-              `}
-            >
-              LAK
-            </motion.h1>
+          <motion.div layout className="flex items-center">
 
-            <motion.div
-              layout
-              animate={{
-                width: phase === "split" ? 180 : 0,
-              }}
-              transition={{ duration: 1, ease: [0.83, 0, 0.17, 1] }}
-            />
+            {phase === "expanded" ? (
+              // ✅ CYCLING WORDS
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={words[wordIndex]}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -40 }}
+                  transition={{ duration: 0.6 }}
+                  className="font-bold leading-none tracking-tighter mix-blend-difference text-[18vw] sm:text-[16vw] md:text-[14vw]"
+                >
+                  {words[wordIndex]}
+                </motion.h1>
+              </AnimatePresence>
+            ) : (
+              // ✅ ORIGINAL SPLIT NAME
+              <>
+                <motion.h1
+                  layout
+                  className="font-bold mix-blend-difference text-6xl md:text-8xl"
+                >
+                  LAK
+                </motion.h1>
 
-            <motion.h1
-              layout
-              className={`font-bold leading-none tracking-tighter mix-blend-difference
-                ${phase === "expanded" ? "text-[18vw] sm:text-[16vw] md:text-[14vw]" : "text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"}
-              `}
-            >
-              SHYA
-            </motion.h1>
+                <motion.div
+                  layout
+                  animate={{ width: phase === "split" ? 180 : 0 }}
+                  transition={{ duration: 1 }}
+                />
+
+                <motion.h1
+                  layout
+                  className="font-bold mix-blend-difference text-6xl md:text-8xl"
+                >
+                  SHYA
+                </motion.h1>
+              </>
+            )}
+
           </motion.div>
         </motion.div>
       </div>
 
-      {/* LAYER 3: THE HERO DETAILS */}
+      {/* LAYER 3: DETAILS */}
       <AnimatePresence>
         {phase === "expanded" && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="absolute top-0 left-0 w-full h-full z-30 pointer-events-none flex justify-between p-4 sm:p-6 md:p-10 lg:p-14"
+            className="absolute inset-0 z-30 pointer-events-none flex justify-between p-6 md:p-12"
           >
-            <div className="ml-auto text-right text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-wider sm:tracking-widest text-white/80">
-              <p className="hidden sm:block">Java Developer</p>
-              <p className="hidden sm:block">Based in India</p>
-              <p className="text-green-400 mt-1 sm:mt-2">● Available</p>
+            <div className="ml-auto text-right text-xs font-mono uppercase text-white/80">
+              <p>Java Developer</p>
+              <p>Based in India</p>
+              <p className="text-green-400 mt-2">● Available</p>
             </div>
 
-            <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 right-6 sm:right-10 md:right-14">
-              <div className="p-2 sm:p-3 md:p-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm animate-bounce">
-                <ArrowDownRight className="text-white w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+            <div className="absolute bottom-10 right-10">
+              <div className="p-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm animate-bounce">
+                <ArrowDownRight className="text-white w-5 h-5" />
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </section>
   )
 }
