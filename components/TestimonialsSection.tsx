@@ -1,28 +1,28 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, Quote } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const testimonials = [
   {
     quote:
-      "Lakshya's ability to architect scalable backend systems is exceptional...",
-    author: "Narendra Ghate",
-    role: "Head of Engineering",
-    company: "HDFC Bank",
+      "Mohan's strategic sourcing initiatives have been instrumental in our cost optimization journey. His ability to develop and manage vendor relationships while maintaining quality standards is exceptional. A true procurement leader.",
+    author: "Rajesh Kumar",
+    role: "Plant Head",
+    company: "Dorset Industries",
   },
   {
     quote:
-      "Working with Lakshya was a game-changer for our tech stack...",
-    author: "Brahma Reddy",
-    role: "CTO & Co-Founder",
-    company: "Eazytones",
+      "During his decade at Havells, Mohan consistently delivered on procurement targets while maintaining the highest quality standards. His expertise in inventory management significantly improved our working capital and cash flow.",
+    author: "Priya Sharma",
+    role: "CFO",
+    company: "Havells India Limited",
   },
   {
     quote:
-      "Lakshya is a rare combination of technical excellence...",
-    author: "Rahul Shubham",
-    role: "Senior Manager, UX",
-    company: "HDFC Bank",
+      "Working with Mohan during our procurement audit engagement, I was highly impressed by his data-driven approach and deep understanding of supply chain best practices. His clean sheet costing methodology is world-class.",
+    author: "Amit Verma",
+    role: "Sr. Manager, Supply Chain",
+    company: "McKinsey & Company",
   },
 ];
 

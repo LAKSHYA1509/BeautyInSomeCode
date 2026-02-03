@@ -11,7 +11,7 @@ const snapshots = [
   "/assets/Untitleddesign.gif",
 ]
 
-const words = ["DEV", "WRITER", "READER", "ARCHITECT", "LAKSHYA"]
+const words = ["LEADER", "SOURCING", "EXPERT", "STRATEGIST", "MOHAN"]
 
 interface HeroProps {
   onComplete?: () => void
@@ -71,8 +71,8 @@ export function Hero({ onComplete }: HeroProps) {
           initial={{ width: 0, height: 0, borderRadius: "20px" }}
           animate={
             phase === "initial" ? { width: 0, height: 0 } :
-            phase === "split" ? { width: "200px", height: "120px", borderRadius: "12px", x: -30 } :
-            { width: "100%", height: "100%", borderRadius: "0px" }
+              phase === "split" ? { width: "200px", height: "120px", borderRadius: "12px", x: -30 } :
+                { width: "100%", height: "100%", borderRadius: "0px" }
           }
           transition={{ duration: 1.2, ease: [0.83, 0, 0.17, 1] }}
           className="relative overflow-hidden"
@@ -96,11 +96,10 @@ export function Hero({ onComplete }: HeroProps) {
       <div className="absolute inset-0 z-20 pointer-events-none">
         <motion.div
           layout
-          className={`flex w-full h-full transition-all duration-1000 ${
-            phase === "expanded"
-              ? "items-end justify-start p-6 md:p-12"
-              : "items-center justify-center"
-          }`}
+          className={`flex w-full h-full transition-all duration-1000 ${phase === "expanded"
+            ? "items-end justify-start p-6 md:p-12"
+            : "items-center justify-center"
+            }`}
         >
           <motion.div layout className="flex items-center">
 
@@ -125,7 +124,7 @@ export function Hero({ onComplete }: HeroProps) {
                   layout
                   className="font-bold mix-blend-difference text-6xl md:text-8xl"
                 >
-                  LAK
+                  MO
                 </motion.h1>
 
                 <motion.div
@@ -138,7 +137,7 @@ export function Hero({ onComplete }: HeroProps) {
                   layout
                   className="font-bold mix-blend-difference text-6xl md:text-8xl"
                 >
-                  SHYA
+                  HAN
                 </motion.h1>
               </>
             )}
@@ -157,9 +156,9 @@ export function Hero({ onComplete }: HeroProps) {
             className="absolute inset-0 z-30 pointer-events-none flex justify-between p-6 md:p-12"
           >
             <div className="ml-auto text-right text-xs font-mono uppercase text-white/80">
-              <p>Java Developer</p>
-              <p>Based in India</p>
-              <p className="text-green-400 mt-2">● Available</p>
+              <p>Procurement & Supply Chain Leader</p>
+              <p>Based in Faridabad, Haryana</p>
+              <p className="text-green-400 mt-2">● Available for Consulting</p>
             </div>
 
             <div className="absolute bottom-10 right-10">

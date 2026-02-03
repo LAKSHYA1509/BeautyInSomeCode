@@ -23,7 +23,7 @@ export function AppleStory() {
   const imageScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.1])
 
   return (
-    <section ref={ref}   className="relative bg-gradient-to-b from-black via-[#0F0F14] to-[#0B0B0F] text-white min-h-[200vh]">
+    <section ref={ref} className="relative bg-gradient-to-b from-black via-[#0F0F14] to-[#0B0B0F] text-white min-h-[200vh]">
 
       {/* SCENE 1 — PINNED IMAGE WITH CONTENT (Desktop only sticky) */}
       <div className="relative md:min-h-[180vh]">
@@ -59,12 +59,12 @@ export function AppleStory() {
             className="text-center max-w-4xl mx-auto"
           >
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight font-light mb-4 sm:mb-6 md:mb-8">
-              <span className="text-[#86868B]">Building </span>
-              <span className="bg-gradient-to-r from-white via-white to-primary bg-clip-text text-transparent">backend systems</span>
+              <span className="text-[#86868B]">Transforming </span>
+              <span className="bg-gradient-to-r from-white via-white to-primary bg-clip-text text-transparent">procurement operations</span>
             </p>
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-tight font-light">
-              <span className="text-[#86868B]">that power </span>
-              <span className="bg-gradient-to-r from-primary via-purple-400 to-white bg-clip-text text-transparent">millions.</span>
+              <span className="text-[#86868B]">across </span>
+              <span className="bg-gradient-to-r from-primary via-purple-400 to-white bg-clip-text text-transparent">30+ years.</span>
             </p>
           </motion.div>
         </div>
@@ -126,9 +126,9 @@ export function AppleStory() {
           >
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight font-light px-4">
               <span className="text-[#86868B]">From </span>
-              <span className="text-white">Spring Boot Microservices</span>
+              <span className="text-white">Quality Assurance</span>
               <span className="text-[#86868B]"> to </span>
-              <span className="text-white">Distributed Systems</span>
+              <span className="text-white">Strategic Leadership</span>
             </p>
           </motion.div>
 
@@ -146,7 +146,7 @@ export function AppleStory() {
                 alt="System design"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-light">System Design</h3>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-light">Strategic Sourcing</h3>
               </div>
             </motion.div>
 
@@ -163,7 +163,7 @@ export function AppleStory() {
                 alt="Database optimization"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-light">Data Architecture</h3>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-light">Vendor Management</h3>
               </div>
             </motion.div>
           </div>
@@ -188,7 +188,7 @@ export function AppleStory() {
               viewport={{ once: true }}
             >
               <span className="bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
-                Backend.
+                Procurement.
               </span>
             </motion.h2>
             <motion.h2
@@ -199,7 +199,7 @@ export function AppleStory() {
               viewport={{ once: true }}
             >
               <span className="bg-gradient-to-r from-[#C9A962] via-[#D4AF37] to-[#C9A962] bg-clip-text text-transparent">
-                Excellence.
+                Leadership.
               </span>
             </motion.h2>
           </div>
@@ -212,8 +212,8 @@ export function AppleStory() {
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#86868B] mt-8 sm:mt-12 md:mt-16 max-w-3xl mx-auto leading-relaxed font-light px-4"
           >
             Architecting robust{" "}
-            <span className="text-white">Java applications</span> with{" "}
-            <span className="text-white">scalability</span> at the core.
+            <span className="text-white">procurement strategies</span> with{" "}
+            <span className="text-white">sustainable value</span> at the core.
           </motion.p>
         </motion.div>
 

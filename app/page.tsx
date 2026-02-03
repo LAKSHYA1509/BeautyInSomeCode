@@ -16,9 +16,12 @@ import { SmoothScroll } from "@/components/smooth-scroll"
 // import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
-import TechStackMarquee from "@/components/TechStackMarquee"
+import {TechStackMarquee} from "@/components/TechStackMarquee"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import PhilosophySection from "@/components/PhilosophySection"
+import { CareerJourney } from "@/components/career-journey"
+import { KeyAchievements } from "@/components/key-achievements"
+import { Certifications } from "@/components/certification"
 // import { LifePath } from "@/components/LifePath"
 
 export default function HomePage() {
@@ -62,7 +65,9 @@ export default function HomePage() {
               <AppleStory />
               <AboutSection />
               <TechStackMarquee />
-              <ProjectsSection />
+              <CareerJourney />
+              <KeyAchievements />
+              <Certifications />
               <AchievementsSection />
               <TestimonialsSection />
               <AwardsSection />

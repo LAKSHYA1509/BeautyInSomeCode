@@ -4,16 +4,16 @@ import { motion, useInView, useMotionValue, useSpring } from "framer-motion"
 import { useEffect, useRef } from "react"
 
 const achievements = [
-  { number: 12, suffix: "+", label: "Technical Wins", description: "Hackathons & competitions" },
-  { number: 1, suffix: "st", label: "National Finalist", description: "Hackathon achievement" },
-  { number: 700, suffix: "+", label: "DSA Problems", description: "Solved on LeetCode" },
-  { number: 1, suffix: "", label: "IIT Delhi Finalist", description: "Prestigious recognition" },
+  { number: 500, suffix: "+", label: "Cr Portfolio", description: "Annual procurement managed" },
+  { number: 30, suffix: "+", label: "Years Experience", description: "Industry leadership" },
+  { number: 3, suffix: "", label: "Plants Managed", description: "Multi-location operations" },
+  { number: 25, suffix: "%", label: "Cost Reduction", description: "Supplier rationalization" },
 ]
 
 const milestones = [
-  { title: "Microsoft Student Ambassador", description: "Recognized for technical leadership and community impact" },
-  { title: "Speaker & Writer", description: "Sharing knowledge through talks and technical articles" },
-  { title: "Open Source Contributor", description: "Contributing to projects that matter" },
+  { title: "MBA – Operations Management", description: "Annamalai University (78%) – Strategic business acumen" },
+  { title: "ISO Certified Internal Auditor", description: "ISO 9001, 14001, OHSAS 18001 – Quality excellence" },
+  { title: "SAP MM & ERP Expert", description: "Advanced procurement systems and data analytics" },
 ]
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {

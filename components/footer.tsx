@@ -15,9 +15,9 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2 text-[#888888] text-sm">
-            <span>Crafted with precision by</span>
+            <span>Professional Excellence by</span>
             <Link href="/" className="text-[#E8E8E8] hover:text-[#C9A962] transition-colors duration-300">
-              Lakshya Bhardwaj
+              Mohan Kumar Bhardwaj
             </Link>
           </div>
 

@@ -3,14 +3,13 @@
 import React from "react"
 
 import { motion, useInView } from "framer-motion"
-import { ExternalLink, Github, Linkedin, Mail } from "lucide-react"
+import { ExternalLink, Linkedin, Mail } from "lucide-react"
 import { useRef, useState } from "react"
 
 const socialLinks = [
-  { name: "Email", href: "mailto:lakshya@example.com", icon: Mail },
-  { name: "GitHub", href: "https://github.com", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
-  { name: "LeetCode", href: "https://leetcode.com", icon: ExternalLink },
+  { name: "Email", href: "mailto:mbmohanbhardwaj@gmail.com", icon: Mail },
+  { name: "LinkedIn", href: "https://linkedin.com/in/mohan-bhardwaj", icon: Linkedin },
+  { name: "Phone", href: "tel:+919810340113", icon: ExternalLink },
 ]
 
 export function ContactSection() {
@@ -49,11 +48,11 @@ export function ContactSection() {
               Contact
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-4 sm:mb-6">
-              Let&apos;s build something meaningful.
+              Let&apos;s discuss your procurement challenges.
             </h2>
             <p className="text-[#888888] text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 md:mb-12 max-w-md">
-              Have an idea or project in mind? I&apos;d love to hear about it.
-              Let&apos;s create something extraordinary together.
+              Whether you need strategic sourcing consulting, vendor development support,
+              or procurement optimization, I&apos;d love to help transform your supply chain operations.
             </p>
 
             {/* Social Links */}

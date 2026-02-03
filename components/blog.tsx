@@ -20,10 +20,10 @@ export function BlogSection() {
                 >
                     <div>
                         <span className="inline-block text-xs sm:text-sm text-[#C9A962] tracking-[0.2em] uppercase mb-3 sm:mb-4">
-                            Writings
+                            Industry Insights
                         </span>
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#E8E8E8] tracking-tight">
-                            Latest <span className="text-[#C9A962] italic">Insights</span>
+                            Procurement <span className="text-[#C9A962] italic">Perspectives</span>
                         </h2>
                     </div>
 

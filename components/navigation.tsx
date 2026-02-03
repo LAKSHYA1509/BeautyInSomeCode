@@ -24,11 +24,11 @@ export function Navigation() {
     >
       <nav className="mx-auto max-w-7xl px-6 py-6">
         <div className="flex items-center justify-between">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="text-lg font-medium tracking-wide text-[#E8E8E8] hover:text-[#C9A962] transition-colors duration-300"
           >
-            Lakshya Bhardwaj
+            Mohan Kumar Bhardwaj
           </Link>
 
           {/* Desktop Navigation */}

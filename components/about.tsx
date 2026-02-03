@@ -5,10 +5,10 @@ import Image from "next/image"
 import { useRef } from "react"
 
 const highlights = [
-  { label: "Backend Architecture", description: "Scalable systems" },
-  { label: "700+ DSA", description: "Problems solved" },
-  { label: "Hackathon Winner", description: "Multiple wins" },
-  { label: "Speaker & Writer", description: "Tech community" },
+  { label: "₹500+ Cr Portfolio", description: "Annual procurement" },
+  { label: "30+ Years", description: "Industry experience" },
+  { label: "Multi-Plant Leader", description: "3 facilities managed" },
+  { label: "Strategic Sourcing", description: "Global operations" },
 ]
 
 export function AboutSection() {
@@ -40,7 +40,7 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-6 sm:mb-8 leading-tight"
             >
-              Crafting digital experiences with precision and purpose.
+              Transforming procurement into strategic value creation.
             </motion.h2>
 
             <motion.div
@@ -50,14 +50,16 @@ export function AboutSection() {
               className="space-y-4 sm:space-y-6 text-[#888888] text-base sm:text-lg leading-relaxed"
             >
               <p>
-                I&apos;m a Java Full Stack Developer with a deep passion for building
-                robust, scalable systems that stand the test of time. My expertise
-                lies at the intersection of elegant code and efficient architecture.
+                I&apos;m a Procurement and Supply Chain Leader with 30+ years of proven expertise across
+                Architectural Hardware, Electrical Switchgear, Automotive Components, and Sheet
+                Metal Manufacturing. My strength lies in strategic sourcing excellence, vendor development,
+                and delivering sustainable cost savings across multi-plant operations.
               </p>
               <p>
-                With a strong foundation in backend development and a keen eye for
-                system design, I transform complex problems into streamlined solutions
-                that drive real business value.
+                Currently heading end-to-end procurement operations for Dorset Industries across
+                Gurgaon, Jammu, and Dharuhera plants, managing ₹500+ Cr annual procurement with
+                an 18-member team. I transform complex supply chain challenges into streamlined
+                solutions that drive measurable business value.
               </p>
             </motion.div>
 
