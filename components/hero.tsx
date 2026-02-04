@@ -5,10 +5,10 @@ import { ArrowDownRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const snapshots = [
-  "/assets/Untitleddesign.gif",
-  "/assets/Untitleddesign.gif",
-  "/assets/Untitleddesign.gif",
-  "/assets/Untitleddesign.gif",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
 ]
 
 const words = ["DEV", "WRITER", "READER", "ARCHITECT", "LAKSHYA"]
@@ -78,16 +78,21 @@ export function Hero({ onComplete }: HeroProps) {
           className="relative overflow-hidden"
         >
           <AnimatePresence mode="popLayout">
-            <motion.img
+            <motion.video
               key={phase === "expanded" ? "final" : index}
               src={snapshots[index]}
+              autoPlay
+              loop
+              muted
+              playsInline
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.4 }}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: phase === "expanded" ? "brightness(0.5)" : "brightness(1)" }}
-            />
+/>
+
           </AnimatePresence>
         </motion.div>
       </div>
