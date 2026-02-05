@@ -1,136 +1,62 @@
 "use client"
 
-import React from "react"
-
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { User } from "lucide-react"
-
-interface Comment {
-  id: string
-  name: string
-  content: string
-  date: Date
-}
+import Giscus from "@giscus/react"
+import { MessageSquare } from "lucide-react"
 
 interface CommentsSectionProps {
   postSlug: string
 }
 
 export function CommentsSection({ postSlug }: CommentsSectionProps) {
-  const [comments, setComments] = useState<Comment[]>([
-    {
-      id: "1",
-      name: "Sarah Chen",
-      content: "Great article! The section on circuit breakers was particularly insightful. I've been implementing similar patterns in our microservices architecture.",
-      date: new Date("2024-12-16"),
-    },
-    {
-      id: "2",
-      name: "Alex Kumar",
-      content: "This is exactly what I needed. The code examples are clear and practical. Would love to see a follow-up on distributed tracing.",
-      date: new Date("2024-12-17"),
-    },
-  ])
-
-  const [formData, setFormData] = useState({
-    name: "",
-    content: "",
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!formData.name.trim() || !formData.content.trim()) return
-
-    const newComment: Comment = {
-      id: Date.now().toString(),
-      name: formData.name,
-      content: formData.content,
-      date: new Date(),
-    }
-
-    setComments([newComment, ...comments])
-    setFormData({ name: "", content: "" })
-  }
-
   return (
-    <section>
-      <h3 className="text-2xl font-light text-[#E8E8E8] mb-8">
-        Comments ({comments.length})
-      </h3>
+    <section className="mt-20">
+      {/* Section Header */}
+      <div className="flex items-center gap-3 mb-8">
+        <MessageSquare className="w-6 h-6 text-[#C9A962]" />
+        <h3 className="text-2xl font-light text-[#E8E8E8]">
+          Discussion
+        </h3>
+      </div>
 
-      {/* Comment Form */}
-      <form onSubmit={handleSubmit} className="mb-12">
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="comment-name" className="block text-sm text-[#888888] mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              id="comment-name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300"
-              placeholder="Your name"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="comment-content" className="block text-sm text-[#888888] mb-2">
-              Comment
-            </label>
-            <textarea
-              id="comment-content"
-              rows={4}
-              value={formData.content}
-              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-              className="w-full px-4 py-3 bg-[#1A1A1A]/50 border border-[#1A1A1A] rounded-xl text-[#E8E8E8] placeholder-[#555555] focus:outline-none focus:border-[#8B7EC8]/50 transition-colors duration-300 resize-none"
-              placeholder="Share your thoughts..."
-            />
-          </div>
-
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-6 py-3 bg-[#E8E8E8] text-[#0D0D0D] font-medium rounded-xl hover:bg-[#C9A962] transition-colors duration-300"
+      <div className="text-sm text-[#888] mb-6">
+        <p>
+          💬 Comments are powered by{" "}
+          <a
+            href="https://giscus.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#C9A962] hover:text-[#E8E8E8] transition-colors underline decoration-[#C9A962]/30"
           >
-            Post Comment
-          </motion.button>
-        </div>
-      </form>
+            GitHub Discussions
+          </a>
+          . Sign in with your GitHub account to leave a comment.
+        </p>
+      </div>
 
-      {/* Comments List */}
-      <div className="space-y-6">
-        {comments.map((comment, index) => (
-          <motion.div
-            key={comment.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="p-6 rounded-xl bg-[#1A1A1A]/30 border border-[#1A1A1A]"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B7EC8]/30 to-[#4A6FA5]/30 flex items-center justify-center flex-shrink-0">
-                <User className="w-5 h-5 text-[#888888]" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="font-medium text-[#E8E8E8]">{comment.name}</span>
-                  <span className="text-xs text-[#555555]">
-                    {comment.date.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </span>
-                </div>
-                <p className="text-[#AAAAAA] leading-relaxed">{comment.content}</p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+      {/* Giscus Comments */}
+      <Giscus
+        id="comments"
+        repo="LAKSHYA1509/BeautyInSomeCode"
+        repoId="R_kgDORGKZ8g" // You'll need to get this from giscus.app
+        category="General"
+        categoryId="DIC_kwDORGKZ8s4C17Tr" // You'll need to get this from giscus.app
+        mapping="pathname"
+        term={postSlug}
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="top"
+        theme="dark"
+        lang="en"
+        loading="lazy"
+      />
+
+      {/* Instructions */}
+      <div className="mt-8 p-4 rounded-xl bg-[#1A1A1A]/30 border border-[#1A1A1A]">
+        <p className="text-xs text-[#666] leading-relaxed">
+          <strong className="text-[#888]">First time here?</strong> The comment system uses GitHub Discussions.
+          Click the button above to sign in with GitHub. Your comments will appear both here and in the
+          repository's discussions tab.
+        </p>
       </div>
     </section>
   )

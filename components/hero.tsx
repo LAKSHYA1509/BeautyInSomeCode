@@ -4,14 +4,21 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ArrowDownRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
-const snapshots = [
+const desktop = [
   "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770300463/202602051923_bcycpe.mp4",
   "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
   "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
 ]
 
-const words = ["DEV", "WRITER", "READER", "ARCHITECT", "LAKSHYA"]
+const mobile = [
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770300609/202602051923_1_tberz8.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770223413/202602042113_1_tllnkt.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770302363/202602051923_2_hxg9av.mp4",
+  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770223413/202602042113_1_tllnkt.mp4",
+]
+
+const words = ["DEV", "WRITER", "READER", "SPEAKER", "LAKSHYA"]
 
 interface HeroProps {
   onComplete?: () => void
@@ -20,11 +27,27 @@ interface HeroProps {
 export function Hero({ onComplete }: HeroProps) {
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState<"initial" | "split" | "expanded">("initial")
+  
+  // ✅ 1. NEW STATE: Holds the active array (defaults to desktop to avoid hydration mismatch)
+  const [videos, setVideos] = useState(desktop)
 
-  // ✅ WORD CYCLING STATE
   const [wordIndex, setWordIndex] = useState(0)
 
-  // 1️⃣ MASTER TIMELINE
+  // ✅ 2. NEW LOGIC: Check screen size on mount and resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVideos(mobile)
+      } else {
+        setVideos(desktop)
+      }
+    }
+
+    handleResize() // Run on initial load
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   useEffect(() => {
     const splitTimer = setTimeout(() => setPhase("split"), 1200)
 
@@ -39,18 +62,17 @@ export function Hero({ onComplete }: HeroProps) {
     }
   }, [])
 
-  // 2️⃣ IMAGE CYCLING
   useEffect(() => {
     if (phase !== "split") return
 
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % snapshots.length)
+      // ✅ Updated to use 'videos.length' instead of undefined 'snapshots'
+      setIndex((prev) => (prev + 1) % videos.length)
     }, 200)
 
     return () => clearInterval(interval)
-  }, [phase])
+  }, [phase, videos]) // Added videos to dependency
 
-  // 3️⃣ WORD CYCLING (ONLY AFTER EXPANDED)
   useEffect(() => {
     if (phase !== "expanded") return
 
@@ -80,7 +102,8 @@ export function Hero({ onComplete }: HeroProps) {
           <AnimatePresence mode="popLayout">
             <motion.video
               key={phase === "expanded" ? "final" : index}
-              src={snapshots[index]}
+              // ✅ Updated src to use 'videos' state
+              src={videos[index]}
               autoPlay
               loop
               muted
@@ -91,8 +114,7 @@ export function Hero({ onComplete }: HeroProps) {
               transition={{ duration: 0.4 }}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: phase === "expanded" ? "brightness(0.5)" : "brightness(1)" }}
-/>
-
+            />
           </AnimatePresence>
         </motion.div>
       </div>
@@ -110,7 +132,6 @@ export function Hero({ onComplete }: HeroProps) {
           <motion.div layout className="flex items-center">
 
             {phase === "expanded" ? (
-              // ✅ CYCLING WORDS
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={words[wordIndex]}
@@ -124,7 +145,6 @@ export function Hero({ onComplete }: HeroProps) {
                 </motion.h1>
               </AnimatePresence>
             ) : (
-              // ✅ ORIGINAL SPLIT NAME
               <>
                 <motion.h1
                   layout

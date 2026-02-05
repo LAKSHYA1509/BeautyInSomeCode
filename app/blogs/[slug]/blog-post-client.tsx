@@ -1,117 +1,191 @@
 "use client"
 
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { ArrowLeft, Clock, Calendar } from "lucide-react"
-import { getBlogPost } from "@/lib/blog-data"
 import { CommentsSection } from "@/components/comments"
+import { MobileShareButton, ShareButtons } from "@/components/share-buttons"
+import { CodeBlock } from "@/components/ui/code-block"
+import { getBlogPost } from "@/lib/blog-data"
+import { motion, useScroll, useSpring } from "framer-motion"
+import { ArrowLeft, Calendar, Clock } from "lucide-react"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import ReactMarkdown from "react-markdown"
 
 export function BlogPostClient({ slug }: { slug: string }) {
   const post = getBlogPost(slug)
 
-  if (!post) {
-    notFound()
-  }
+  if (!post) notFound()
+
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
 
   return (
-    <main className="min-h-screen bg-[#0D0D0D]">
-      {/* Navigation */}
+    <main className="min-h-screen bg-[#050505] text-[#E8E8E8] selection:bg-[#C9A962]/30 relative overflow-x-hidden">
+
+      {/* Background Texture */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#C9A962]/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[500px] h-[500px] bg-[#8B7EC8]/5 rounded-full blur-[120px]" />
+      </div>
+
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-[#C9A962] origin-left z-50"
+        style={{ scaleX }}
+      />
+
+      {/* Back Navigation */}
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 z-40 bg-[#0D0D0D]/80 backdrop-blur-md border-b border-[#1A1A1A]"
+        className="fixed top-6 left-6 z-40"
       >
-        <nav className="mx-auto max-w-4xl px-6 py-5">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/blogs"
-              className="flex items-center gap-2 text-[#888888] hover:text-[#E8E8E8] transition-colors duration-300"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">All Posts</span>
-            </Link>
-          </div>
-        </nav>
+        <Link
+          href="/blogs"
+          className="group flex items-center gap-2 px-4 py-2 bg-[#111]/80 backdrop-blur-md border border-[#222] rounded-full hover:border-[#444] transition-all duration-300"
+        >
+          <ArrowLeft className="w-4 h-4 text-[#888] group-hover:text-[#E8E8E8] group-hover:-translate-x-1 transition-all" />
+          <span className="text-sm text-[#888] group-hover:text-[#E8E8E8] transition-colors">Back</span>
+        </Link>
       </motion.header>
 
-      <article className="pt-32 pb-20 px-6">
-        <div className="mx-auto max-w-4xl">
-          {/* Header */}
-          <motion.header
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-12"
-          >
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs text-[#888888] bg-[#1A1A1A] rounded-full border border-[#2A2A2A]"
-                >
-                  {tag}
-                </span>
-              ))}
+      <article className="relative z-10 pt-32 pb-20">
+        <div className="mx-auto max-w-[1400px] px-6">
+
+          {/* Hero Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20 border-b border-[#222] pb-12">
+            <div className="lg:col-span-8 lg:col-start-3 text-center">
+              <div className="flex flex-wrap justify-center gap-2 mb-6">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="px-3 py-1 text-xs font-medium tracking-wide text-[#C9A962] bg-[#C9A962]/10 border border-[#C9A962]/20 rounded-full uppercase">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-[#E8E8E8] mb-8 leading-[1.1]">
+                {post.title}
+              </h1>
+
+              <div className="flex items-center justify-center gap-8 text-sm text-[#666]">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>{new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>{post.readingTime}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Sidebar Share */}
+            <div className="hidden lg:flex lg:col-span-2 flex-col items-end gap-4 pt-4 sticky top-32 h-fit">
+              <p className="text-xs font-mono text-[#444] uppercase tracking-widest mb-2">Share</p>
+              <ShareButtons title={post.title} slug={post.slug} layout="vertical" />
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-6 leading-tight">
-              {post.title}
-            </h1>
+            {/* Main Content Area */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="lg:col-span-8"
+            >
+              <ReactMarkdown
+                components={{
+                  // Headers
+                  h1: ({ node, ...props }) => <h1 className="text-3xl font-bold text-[#E8E8E8] mt-12 mb-6" {...props} />,
+                  h2: ({ node, ...props }) => <h2 className="text-2xl md:text-3xl font-semibold text-[#E8E8E8] mt-16 mb-6 tracking-tight" {...props} />,
+                  h3: ({ node, ...props }) => <h3 className="text-xl font-medium text-[#C9A962] mt-10 mb-4" {...props} />,
 
-            {/* Meta */}
-            <div className="flex items-center gap-6 text-sm text-[#888888]">
-              <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-              <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                {post.readingTime}
-              </span>
-            </div>
-          </motion.header>
+                  // Paragraphs
+                  p: ({ node, ...props }) => <p className="text-[#A0A0A0] text-lg leading-8 mb-6 font-light" {...props} />,
 
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="prose prose-invert prose-lg max-w-none
-              prose-headings:font-light prose-headings:text-[#E8E8E8]
-              prose-h1:text-3xl prose-h1:mb-8
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-[#1A1A1A] prose-h2:pb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-[#C9A962]
-              prose-p:text-[#AAAAAA] prose-p:leading-relaxed prose-p:mb-6
-              prose-a:text-[#8B7EC8] prose-a:no-underline hover:prose-a:text-[#C9A962]
-              prose-strong:text-[#E8E8E8] prose-strong:font-medium
-              prose-code:text-[#C9A962] prose-code:bg-[#1A1A1A] prose-code:px-2 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
-              prose-pre:bg-[#1A1A1A] prose-pre:border prose-pre:border-[#2A2A2A] prose-pre:rounded-xl prose-pre:overflow-x-auto
-              prose-ul:text-[#AAAAAA] prose-ol:text-[#AAAAAA]
-              prose-li:marker:text-[#555555]
-              prose-blockquote:border-l-[#8B7EC8] prose-blockquote:text-[#888888] prose-blockquote:italic"
-          >
-            <ReactMarkdown>{post.content}</ReactMarkdown>
-          </motion.div>
+                  // Lists
+                  ul: ({ node, ...props }) => <ul className="space-y-3 mb-8" {...props} />,
+                  ol: ({ node, ...props }) => <ol className="space-y-3 mb-8 list-decimal list-inside text-[#A0A0A0]" {...props} />,
+                  li: ({ children, ...props }) => (
+                    <li className="flex gap-3 text-[#A0A0A0] leading-7" {...props}>
+                      <span className="mt-2 min-w-[6px] h-[6px] rounded-full bg-[#C9A962]" />
+                      <span>{children}</span>
+                    </li>
+                  ),
 
-          {/* Comments Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-20 pt-12 border-t border-[#1A1A1A]"
-          >
+                  // Blockquotes
+                  blockquote: ({ node, ...props }) => (
+                    <blockquote className="border-l-2 border-[#C9A962] pl-6 my-8 italic text-xl text-[#888]" {...props} />
+                  ),
+
+                  // Inline formatting
+                  strong: ({ node, ...props }) => <strong className="text-[#E8E8E8] font-semibold" {...props} />,
+                  a: ({ node, ...props }) => (
+                    <a className="text-[#C9A962] hover:text-[#E8E8E8] underline decoration-[#C9A962]/30 hover:decoration-[#E8E8E8] transition-all" {...props} />
+                  ),
+
+                  // --- NEW: ULTRA-MODERN IMAGE COMPONENT ---
+                  img: ({ src, alt }) => {
+                    return (
+                      <figure className="my-16">
+                        {/* Image Container with Glow and Border */}
+                        <div className="relative rounded-2xl overflow-hidden border border-[#2A2A2A] shadow-[0_0_40px_-10px_rgba(201,169,98,0.15)] bg-[#0A0A0A]">
+                          {/* We use standard img tag for broad compatibility, but styled heavily */}
+                          <img
+                            src={src}
+                            alt={alt}
+                            className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity duration-500"
+                          />
+                        </div>
+
+                        {/* Editorial Caption */}
+                        {alt && (
+                          <figcaption className="mt-4 text-center text-sm text-[#888] font-mono tracking-tight flex items-center justify-center gap-2">
+                            <span className="w-4 h-px bg-[#C9A962]/50"></span>
+                            {alt}
+                            <span className="w-4 h-px bg-[#C9A962]/50"></span>
+                          </figcaption>
+                        )}
+                      </figure>
+                    )
+                  },
+
+                  // Code Blocks
+                  code({ node, inline, className, children, ...props }: any) {
+                    const match = /language-(\w+)/.exec(className || "")
+                    return !inline && match ? (
+                      <CodeBlock
+                        language={match[1]}
+                        value={String(children).replace(/\n$/, "")}
+                      />
+                    ) : (
+                      <code className="bg-[#1A1A1A] text-[#C9A962] px-1.5 py-0.5 rounded text-sm font-mono border border-[#2A2A2A]" {...props}>
+                        {children}
+                      </code>
+                    )
+                  }
+                }}
+              >
+                {post.content}
+              </ReactMarkdown>
+
+              <div className="my-20 h-px bg-gradient-to-r from-transparent via-[#222] to-transparent" />
+            </motion.div>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
             <CommentsSection postSlug={post.slug} />
-          </motion.div>
+          </div>
         </div>
       </article>
+
+      {/* Mobile Share Button */}
+      <MobileShareButton title={post.title} slug={post.slug} />
     </main>
   )
 }

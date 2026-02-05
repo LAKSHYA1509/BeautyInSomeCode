@@ -67,10 +67,9 @@ const PhilosophySection = () => {
                         className="col-span-1"
                     >
                         <div className="relative h-36 md:h-44 rounded-3xl overflow-hidden shadow-xl group">
-                            <Image
-                                src={abstractBg}
+                            <img
+                                src={"https://img.freepik.com/free-vector/creative-abstract-quantum-illustration_23-2149236239.jpg"}
                                 alt="Abstract"
-                                fill
                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-purple-500/20 group-hover:bg-purple-500/30 transition-colors duration-500" />
@@ -96,7 +95,7 @@ const PhilosophySection = () => {
                     >
                         <div className="relative h-36 md:h-44 rounded-3xl overflow-hidden shadow-xl group">
                             <Image
-                                src={abstractBg}
+                                src="https://res.cloudinary.com/dgmrrew73/image/upload/v1770303195/stock-vector-55536305-L_pckjvx.png"
                                 alt="Abstract background"
                                 fill
                                 className="object-cover scale-x-[-1] group-hover:scale-110 transition-transform duration-700"

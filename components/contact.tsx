@@ -3,14 +3,15 @@
 import React from "react"
 
 import { motion, useInView } from "framer-motion"
-import { ExternalLink, Github, Linkedin, Mail } from "lucide-react"
+import { CodeIcon, ExternalLink, Github, Linkedin, Mail } from "lucide-react"
 import { useRef, useState } from "react"
 
 const socialLinks = [
-  { name: "Email", href: "mailto:lakshya@example.com", icon: Mail },
-  { name: "GitHub", href: "https://github.com", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
-  { name: "LeetCode", href: "https://leetcode.com", icon: ExternalLink },
+  { name: "Email", href: "mailto:lakshyabhardwaj200315@gmail.com", icon: Mail },
+  { name: "GitHub", href: "https://github.com/LAKSHYA1509", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/lakshyabhardwaj1509/", icon: Linkedin },
+  { name: "LeetCode", href: "https://leetcode.com/u/LakshyaBhardwaj1509/", icon: ExternalLink },
+  { name: "Codolio", href: "https://codolio.com/profile/Lakshya1509", icon: CodeIcon }
 ]
 
 export function ContactSection() {
@@ -23,16 +24,37 @@ export function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setFormState({ name: "", email: "", message: "" })
-    setTimeout(() => setSubmitted(false), 3000)
+    setError("")
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message")
+      }
+
+      setIsSubmitting(false)
+      setSubmitted(true)
+      setFormState({ name: "", email: "", message: "" })
+      setTimeout(() => setSubmitted(false), 3000)
+    } catch (err) {
+      setIsSubmitting(false)
+      setError(err instanceof Error ? err.message : "Failed to send message. Please try again.")
+      setTimeout(() => setError(""), 5000)
+    }
   }
 
   return (
@@ -129,6 +151,13 @@ export function ContactSection() {
                   placeholder="Tell me about your project..."
                 />
               </div>
+
+              {/* Error Message */}
+              {error && (
+                <div className="p-3 sm:p-4 bg-red-900/20 border border-red-500/50 rounded-xl">
+                  <p className="text-red-400 text-xs sm:text-sm">{error}</p>
+                </div>
+              )}
 
               <motion.button
                 type="submit"
