@@ -6,8 +6,11 @@ import { useState } from "react"
 
 const navItems = [
   { name: "About", href: "#about" },
-  { name: "Work", href: "#projects" },
-  { name: "Achievements", href: "#achievements" },
+  // "Work" pointed at #projects, which skipped past the employment history
+  // entirely. Separate destinations now that both sections exist.
+  { name: "Work", href: "#work" },
+  { name: "Projects", href: "#projects" },
+  { name: "Book", href: "#book" },
   { name: "Blog", href: "/blogs" },
   { name: "Contact", href: "#contact" },
 ]

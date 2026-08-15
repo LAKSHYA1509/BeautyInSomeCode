@@ -30,7 +30,7 @@ const MOBILE_IDS = [
 const desktop = DESKTOP_IDS.map((id) => ({ src: clip(id, 1280), poster: poster(id, 1280) }))
 const mobile = MOBILE_IDS.map((id) => ({ src: clip(id, 720), poster: poster(id, 720) }))
 
-const words = ["DEV", "WRITER", "READER", "SPEAKER", "LAKSHYA"]
+const words = ["DEV", "WRITER", "READER", "SPEAKER", "RELENTLESS", "LAKSHYA"]
 
 interface HeroProps {
   onComplete?: () => void
@@ -178,7 +178,13 @@ export function Hero({ onComplete }: HeroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -40 }}
                   transition={{ duration: 0.6 }}
-                  className="font-bold leading-none tracking-tighter mix-blend-difference text-[18vw] sm:text-[16vw] md:text-[14vw]"
+                  // Size follows word length — at 18vw a ten-letter word like
+                  // RELENTLESS measures wider than the viewport and clips.
+                  className={`font-bold leading-none tracking-tighter mix-blend-difference ${
+                    words[wordIndex].length >= 9
+                      ? "text-[11vw] sm:text-[10vw] md:text-[9vw]"
+                      : "text-[18vw] sm:text-[16vw] md:text-[14vw]"
+                  }`}
                 >
                   {words[wordIndex]}
                 </motion.h1>

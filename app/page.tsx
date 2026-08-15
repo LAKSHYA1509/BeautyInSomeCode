@@ -14,8 +14,9 @@ import { Navigation } from "@/components/navigation"
 import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { WorkSection } from "@/components/work"
-import { GitHubStats } from "@/components/GithubStats"
 import { ScrollProgress } from "@/components/scroll-progress"
+import { CreedSection } from "@/components/creed"
+import { BookSection } from "@/components/book"
 // import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
@@ -67,13 +68,16 @@ export default function HomePage() {
               <TechStackMarquee />
               <WorkSection />
               <ProjectsSection />
-              <GitHubStats />
+              {/* The 3D contribution graph already renders inside <AppleStory />
+                  as Contribution_Architecture.sys — don't add a second one. */}
               <AchievementsSection />
               {/* Testimonials pulled until real, attributable quotes exist.
                   The previous three were unattributed placeholder text. */}
               <AwardsSection />
               <PhilosophySection />
+              <CreedSection />
               <LifePhotosMarquee />
+              <BookSection />
               <BlogSection />
               {/* <LifePath /> */}
               <ContactSection />
