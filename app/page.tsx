@@ -18,6 +18,7 @@ import { ScrollProgress } from "@/components/scroll-progress"
 import { CreedSection } from "@/components/creed"
 import { BookSection } from "@/components/book"
 import { EducationSection } from "@/components/education"
+import { SectionReveal } from "@/components/section-reveal"
 // import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
@@ -84,25 +85,31 @@ export default function HomePage() {
           className={isLoaded ? undefined : "pointer-events-none"}
         >
           <ScrollProgress />
+
+          {/* AppleStory runs its own sticky scroll choreography — leave it alone.
+              TechStackMarquee is a thin divider strip, not a section. */}
           <AppleStory />
-          <AboutSection />
+
+          <SectionReveal><AboutSection /></SectionReveal>
           <TechStackMarquee />
-          <WorkSection />
-          <ProjectsSection />
+          <SectionReveal><WorkSection /></SectionReveal>
+          <SectionReveal><ProjectsSection /></SectionReveal>
+
           {/* The 3D contribution graph already renders inside <AppleStory />
               as Contribution_Architecture.sys — don't add a second one. */}
-          <AchievementsSection />
+          <SectionReveal><AchievementsSection /></SectionReveal>
+
           {/* Testimonials pulled until real, attributable quotes exist.
               The previous three were unattributed placeholder text. */}
-          <AwardsSection />
-          <EducationSection />
-          <PhilosophySection />
-          <CreedSection />
-          <LifePhotosMarquee />
-          <BookSection />
-          <BlogSection />
+          <SectionReveal variant="fade"><AwardsSection /></SectionReveal>
+          <SectionReveal><EducationSection /></SectionReveal>
+          <SectionReveal variant="fade"><PhilosophySection /></SectionReveal>
+          <SectionReveal variant="fade"><CreedSection /></SectionReveal>
+          <SectionReveal variant="fade"><LifePhotosMarquee /></SectionReveal>
+          <SectionReveal variant="fade"><BookSection /></SectionReveal>
+          <SectionReveal variant="fade"><BlogSection /></SectionReveal>
           {/* <LifePath /> */}
-          <ContactSection />
+          <SectionReveal><ContactSection /></SectionReveal>
           <Footer />
         </motion.main>
       </>

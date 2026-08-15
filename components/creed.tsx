@@ -91,7 +91,7 @@ export function CreedSection() {
     <section
       ref={ref}
       id="creed"
-      className="relative overflow-hidden bg-[#0D0D0D] py-16 sm:py-24 md:py-32 lg:py-40"
+      className="relative overflow-hidden bg-[#0D0D0D] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       {/* Oversized watermark. aria-hidden so screen readers get the word once,
           from the visible heading below, rather than twice. */}

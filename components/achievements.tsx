@@ -45,7 +45,7 @@ export function AchievementsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="achievements" className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section id="achievements" className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
       {/* Background accent */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] rounded-full bg-[#C9A962]/3 blur-[200px]" />
@@ -57,7 +57,7 @@ export function AchievementsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12 sm:mb-16 md:mb-24 text-center"
+          className="mb-8 sm:mb-10 md:mb-14 text-center"
         >
           <span className="inline-block text-xs sm:text-sm text-[#C9A962] tracking-[0.2em] uppercase mb-3 sm:mb-4">
             Achievements
@@ -68,7 +68,7 @@ export function AchievementsSection() {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 md:mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10 md:mb-14">
           {achievements.map((achievement, index) => (
             <motion.div
               key={achievement.label}

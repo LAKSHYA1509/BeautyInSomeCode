@@ -131,14 +131,14 @@ export function WorkSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="work" className="relative py-16 sm:py-24 md:py-32 lg:py-40">
+    <section id="work" className="relative py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12 sm:mb-16 md:mb-24"
+          className="mb-8 sm:mb-10 md:mb-14"
         >
           <span className="mb-3 inline-block text-xs uppercase tracking-[0.2em] text-[#C9A962] sm:mb-4 sm:text-sm">
             Experience

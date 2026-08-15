@@ -35,7 +35,7 @@ export function BookSection() {
     <section
       ref={ref}
       id="book"
-      className="relative overflow-hidden py-16 sm:py-24 md:py-32 lg:py-40"
+      className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24"
     >
       <div className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full bg-gradient-to-bl from-[#C9A962]/10 to-transparent blur-3xl" />
 

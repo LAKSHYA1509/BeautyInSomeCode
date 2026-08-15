@@ -9,7 +9,7 @@ export function BlogSection() {
     const posts = getAllBlogPosts().slice(0, 3)
 
     return (
-        <section id="blog" className="py-16 sm:py-24 md:py-32 lg:py-40 relative overflow-hidden bg-[#0D0D0D]">
+        <section id="blog" className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-[#0D0D0D]">
             <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

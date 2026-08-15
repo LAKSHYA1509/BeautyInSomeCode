@@ -64,7 +64,7 @@ const AwardsSection = () => {
   return (
     <section
       ref={ref}
-      className="py-16 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-background to-surface/50 relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background to-surface/50 relative overflow-hidden"
     >
       {/* Decorative background */}
       <div className="absolute top-0 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
@@ -151,7 +151,7 @@ const AwardsSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12 sm:mb-16 md:mb-20"
+          className="mb-8 sm:mb-10 md:mb-14"
         >
           <span className="text-primary text-xs sm:text-sm font-semibold uppercase tracking-wider mb-3 sm:mb-4 block">
             Recognition

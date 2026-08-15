@@ -41,7 +41,7 @@ const PhilosophySection = () => {
     <section
       ref={ref}
       id="philosophy"
-      className="py-16 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-surface/50 to-background relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-surface/50 to-background relative overflow-hidden"
     >
       {/* Decorative background */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-bl from-[#8B7EC8]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -53,7 +53,7 @@ const PhilosophySection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12 sm:mb-16 md:mb-20"
+          className="mb-8 sm:mb-10 md:mb-14"
         >
           <span className="text-[#C9A962] text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 sm:mb-4 block">
             How I work
