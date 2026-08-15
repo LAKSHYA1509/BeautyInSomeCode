@@ -126,9 +126,9 @@ export function AppleStory() {
           >
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight font-light px-4">
               <span className="text-[#86868B]">From </span>
-              <span className="text-white">Spring Boot Microservices</span>
+              <span className="text-white">one tenant</span>
               <span className="text-[#86868B]"> to </span>
-              <span className="text-white">Distributed Systems</span>
+              <span className="text-white">a fleet of them</span>
             </p>
           </motion.div>
 
@@ -211,9 +211,9 @@ export function AppleStory() {
             viewport={{ once: true }}
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#86868B] mt-8 sm:mt-12 md:mt-16 max-w-3xl mx-auto leading-relaxed font-light px-4"
           >
-            Architecting robust{" "}
-            <span className="text-white">Java applications</span> with{" "}
-            <span className="text-white">scalability</span> at the core.
+            Building systems that hold up in{" "}
+            <span className="text-white">production</span>, for{" "}
+            <span className="text-white">real users</span>, on a real budget.
           </motion.p>
         </motion.div>
 

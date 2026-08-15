@@ -12,20 +12,26 @@ import {
   Zap
 } from "lucide-react";
 
+// Ordered by what actually gets used, not by what looks impressive. The daily
+// production stack leads; Java/Spring stay because they're real and still
+// shipped, just no longer the headline. AWS was removed — the platform runs on
+// a self-managed VPS, so claiming it would have been decoration.
 const techStack = [
-  { name: "Java", icon: Code2 },
-  { name: "Spring Boot", icon: Layers },
-  { name: "React", icon: Zap },
+  { name: "NestJS", icon: Server },
   { name: "TypeScript", icon: Code2 },
   { name: "PostgreSQL", icon: Database },
-  { name: "MySQL", icon: Database },
+  { name: "React Native", icon: Zap },
+  { name: "React", icon: Zap },
   { name: "Redis", icon: Cpu },
-  { name: "Kafka", icon: Server },
+  { name: "BullMQ", icon: Layers },
   { name: "Docker", icon: Container },
-  { name: "AWS", icon: Cloud },
-  { name: "Git", icon: GitBranch },
-  { name: "REST APIs", icon: Server },
-  { name: "Microservices", icon: Layers },
+  { name: "GitHub Actions", icon: GitBranch },
+  { name: "Nginx", icon: Cloud },
+  { name: "Multi-tenant SaaS", icon: Layers },
+  { name: "Java", icon: Code2 },
+  { name: "Spring Boot", icon: Layers },
+  { name: "Kafka", icon: Server },
+  { name: "QDrant", icon: Database },
   { name: "Spring Security", icon: Shield },
 ];
 

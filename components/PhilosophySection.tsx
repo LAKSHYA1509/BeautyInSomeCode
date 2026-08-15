@@ -63,7 +63,7 @@ const PhilosophySection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid gap-10 lg:grid-cols-[1fr,1.15fr] lg:gap-16 items-start">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16 items-start">
           {/* Imagery — local assets only. The old mosaic hotlinked a freepik
               stock illustration and a file literally named stock-vector-55536305. */}
           <motion.div

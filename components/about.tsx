@@ -40,7 +40,7 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#E8E8E8] mb-6 sm:mb-8 leading-tight"
             >
-              Crafting digital experiences with precision and purpose.
+              Twelve clients. One codebase. Mine to keep running.
             </motion.h2>
 
             <motion.div
@@ -50,14 +50,21 @@ export function AboutSection() {
               className="space-y-4 sm:space-y-6 text-[#888888] text-base sm:text-lg leading-relaxed"
             >
               <p>
-                I&apos;m a Java Full Stack Developer with a deep passion for building
-                robust, scalable systems that stand the test of time. My expertise
-                lies at the intersection of elegant code and efficient architecture.
+                I&apos;m a backend and platform engineer. Right now that means owning a
+                multi-tenant loyalty platform in production — one codebase serving
+                twelve white-labelled clients, and everything underneath it: the
+                Postgres schema, the tenancy rules, the CI that ships it, and the
+                pager when it doesn&apos;t.
               </p>
               <p>
-                With a strong foundation in backend development and a keen eye for
-                system design, I transform complex problems into streamlined solutions
-                that drive real business value.
+                Most of what I actually know came from running things that were already
+                live. Idempotent rollouts, blast-radius reasoning, row-level isolation —
+                those aren&apos;t ideas I read about. They&apos;re the shape of problems
+                I&apos;ve had to fix at an inconvenient hour, with real users on the
+                other side.
+              </p>
+              <p>
+                I write too — a book, and whatever else is bothering me that week.
               </p>
             </motion.div>
 

@@ -95,7 +95,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         {/* Background glow on hover */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#8B7EC8]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <div className="relative z-10 grid md:grid-cols-[1fr,auto] gap-6 sm:gap-8 items-start">
+        <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-6 sm:gap-8 items-start">
           <div>
             <motion.h3
               initial={{ opacity: 0 }}

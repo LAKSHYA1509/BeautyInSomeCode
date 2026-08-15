@@ -116,7 +116,7 @@ export function Footer() {
           {/* Copyright Information */}
           <div className="flex flex-col md:items-end gap-2 text-sm text-[#555] pb-2 md:pb-4">
             <p>&copy; {currentYear} Lakshya Bhardwaj.</p>
-            <p>Crafted with precision & code.</p>
+            <p>Built, broken, and fixed by hand.</p>
             <PageViews slug="footer" />
           </div>
         </div>

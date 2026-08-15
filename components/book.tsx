@@ -54,7 +54,10 @@ export function BookSection() {
           </h2>
         </motion.div>
 
-        <div className="grid items-start gap-10 md:grid-cols-[minmax(0,280px),1fr] md:gap-16">
+        {/* Tracks are separated by _ not , — a comma here is invalid in a
+            Tailwind arbitrary value, the class is dropped, and the grid
+            collapses to one column (which is what blew the cover up). */}
+        <div className="grid items-start gap-10 md:grid-cols-[minmax(0,240px)_1fr] md:gap-16">
           {/* Cover */}
           <motion.a
             href={BOOK.buyUrl}
@@ -65,7 +68,7 @@ export function BookSection() {
             animate={isInView ? { opacity: 1, y: 0, rotate: -2 } : {}}
             transition={{ duration: 0.8, delay: 0.15 }}
             whileHover={{ rotate: 0, scale: 1.03 }}
-            className="group mx-auto block w-full max-w-[240px] md:mx-0 md:sticky md:top-24 md:max-w-none"
+            className="group mx-auto block w-full max-w-[180px] sm:max-w-[210px] md:mx-0 md:sticky md:top-24 md:max-w-[240px]"
           >
             <div className="relative overflow-hidden rounded-r-lg rounded-l-sm shadow-2xl shadow-black/60 ring-1 ring-[#2A2A2A]">
               <Image

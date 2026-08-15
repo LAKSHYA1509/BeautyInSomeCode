@@ -95,8 +95,8 @@ export default function OpengraphImage() {
           <div style={{ display: 'flex' }}>github.com/LAKSHYA1509</div>
           <div style={{ display: 'flex', gap: 28 }}>
             <div style={{ display: 'flex' }}>NestJS</div>
-            <div style={{ display: 'flex' }}>Spring Boot</div>
             <div style={{ display: 'flex' }}>Postgres</div>
+            <div style={{ display: 'flex' }}>React Native</div>
             <div style={{ display: 'flex' }}>Docker</div>
           </div>
         </div>
