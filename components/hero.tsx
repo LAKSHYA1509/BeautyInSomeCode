@@ -2,21 +2,33 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowDownRight } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
-const desktop = [
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770300463/202602051923_bcycpe.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770221532/202602042113_wd9l4q.mp4",
+const CLOUD = "https://res.cloudinary.com/dgmrrew73/video/upload"
+
+// The raw uploads are 15-36 MB each and, critically, are NOT faststart —
+// their `moov` atom sits at the END of the file, so a browser has to download
+// the whole thing before it can decode frame one. Routing through a Cloudinary
+// transform re-encodes with `moov` up front AND drops ~75% of the bytes, which
+// is the difference between "plays instantly" and "never renders at all".
+const clip = (id: string, w: number) => `${CLOUD}/f_auto,q_auto,w_${w}/${id}.mp4`
+const poster = (id: string, w: number) => `${CLOUD}/so_0,f_auto,q_auto,w_${w}/${id}.jpg`
+
+// De-duplicated: the desktop list previously repeated one clip three times and
+// the mobile list repeated one twice, so most "rotations" changed nothing.
+const DESKTOP_IDS = [
+  "v1770221532/202602042113_wd9l4q",
+  "v1770300463/202602051923_bcycpe",
 ]
 
-const mobile = [
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770300609/202602051923_1_tberz8.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770223413/202602042113_1_tllnkt.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770302363/202602051923_2_hxg9av.mp4",
-  "https://res.cloudinary.com/dgmrrew73/video/upload/v1770223413/202602042113_1_tllnkt.mp4",
+const MOBILE_IDS = [
+  "v1770300609/202602051923_1_tberz8",
+  "v1770223413/202602042113_1_tllnkt",
+  "v1770302363/202602051923_2_hxg9av",
 ]
+
+const desktop = DESKTOP_IDS.map((id) => ({ src: clip(id, 1280), poster: poster(id, 1280) }))
+const mobile = MOBILE_IDS.map((id) => ({ src: clip(id, 720), poster: poster(id, 720) }))
 
 const words = ["DEV", "WRITER", "READER", "SPEAKER", "LAKSHYA"]
 
@@ -33,6 +45,11 @@ export function Hero({ onComplete }: HeroProps) {
 
   const [wordIndex, setWordIndex] = useState(0)
 
+  // The desktop and mobile lists are different lengths, so a resize mid-rotation
+  // can leave `index` pointing past the end of the new array. Wrap rather than
+  // hand `undefined` to the <video>.
+  const active = videos[index % videos.length]
+
   // ✅ 2. NEW LOGIC: Check screen size on mount and resize
   useEffect(() => {
     const handleResize = () => {
@@ -48,30 +65,48 @@ export function Hero({ onComplete }: HeroProps) {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Keep the latest callback reachable without making it an effect dependency.
+  const onCompleteRef = useRef(onComplete)
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  })
+
   useEffect(() => {
     const splitTimer = setTimeout(() => setPhase("split"), 1200)
 
     const expandTimer = setTimeout(() => {
       setPhase("expanded")
-      setTimeout(() => onComplete?.(), 1800)
+      setTimeout(() => onCompleteRef.current?.(), 1800)
     }, 4400)
 
     return () => {
       clearTimeout(splitTimer)
       clearTimeout(expandTimer)
     }
+    // Intentionally mount-once: the caller passes an inline arrow, so depending on
+    // `onComplete` directly would reset the phase timers on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Rotate in BOTH phases. Previously this was gated on `split`, so the moment
+  // the hero expanded the index froze and the main page showed one static clip
+  // forever. Cadence differs: brisk while the box is small, ambient once full-screen.
   useEffect(() => {
-    if (phase !== "split") return
+    if (phase === "initial") return
+    if (videos.length < 2) return
+
+    const everyMs = phase === "split" ? 900 : 7000
 
     const interval = setInterval(() => {
-      // ✅ Updated to use 'videos.length' instead of undefined 'snapshots'
-      setIndex((prev) => (prev + 1) % videos.length)
-    }, 200)
+      setIndex((prev) => {
+        // Shuffle-style pick so it feels random without ever repeating a frame back-to-back.
+        const next = Math.floor(Math.random() * (videos.length - 1))
+        return next >= prev ? next + 1 : next
+      })
+    }, everyMs)
 
     return () => clearInterval(interval)
-  }, [phase, videos]) // Added videos to dependency
+  }, [phase, videos])
 
   useEffect(() => {
     if (phase !== "expanded") return
@@ -99,11 +134,15 @@ export function Hero({ onComplete }: HeroProps) {
           transition={{ duration: 1.2, ease: [0.83, 0, 0.17, 1] }}
           className="relative overflow-hidden"
         >
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="sync">
             <motion.video
-              key={phase === "expanded" ? "final" : index}
-              // ✅ Updated src to use 'videos' state
-              src={videos[index]}
+              // Keyed on the clip itself so the expanded phase crossfades too.
+              // It used to be pinned to the literal string "final", which meant
+              // React reused one element and the src never actually swapped.
+              key={active.src}
+              src={active.src}
+              poster={active.poster}
+              preload="auto"
               autoPlay
               loop
               muted
@@ -111,7 +150,7 @@ export function Hero({ onComplete }: HeroProps) {
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: phase === "expanded" ? 1.2 : 0.4 }}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: phase === "expanded" ? "brightness(0.5)" : "brightness(1)" }}
             />
@@ -182,7 +221,8 @@ export function Hero({ onComplete }: HeroProps) {
             className="absolute inset-0 z-30 pointer-events-none flex justify-between p-6 md:p-12"
           >
             <div className="ml-auto text-right text-xs font-mono uppercase text-white/80">
-              <p>Java Developer</p>
+              <p>Backend &amp; Platform Engineer</p>
+              <p className="text-white/50">Systems · Pipelines · AI</p>
               <p>Based in India</p>
               <p className="text-green-400 mt-2">● Available</p>
             </div>

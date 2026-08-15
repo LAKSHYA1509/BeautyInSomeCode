@@ -2,29 +2,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, Quote } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
-const testimonials = [
-  {
-    quote:
-      "Lakshya's ability to architect scalable backend systems is exceptional...",
-    author: "Narendra Ghate",
-    role: "Head of Engineering",
-    company: "HDFC Bank",
-  },
-  {
-    quote:
-      "Working with Lakshya was a game-changer for our tech stack...",
-    author: "Brahma Reddy",
-    role: "CTO & Co-Founder",
-    company: "Eazytones",
-  },
-  {
-    quote:
-      "Lakshya is a rare combination of technical excellence...",
-    author: "Rahul Shubham",
-    role: "Senior Manager, UX",
-    company: "HDFC Bank",
-  },
-];
+// Cleared deliberately. The three entries that were here were generated
+// placeholder text — truncated mid-sentence — attributed to named individuals
+// at real companies who never said any of it. Add real quotes only, with
+// permission from the person being quoted.
+const testimonials: {
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+}[] = [];
 
 
 // ---------- Testimonial Card ----------
@@ -106,27 +93,12 @@ const TestimonialCard = ({
 
 
 // ---------- Section ----------
+// NOTE: not currently rendered — see app/page.tsx. Kept so it can be dropped
+// back in once real, attributable quotes exist. The page-wide reading progress
+// bar that used to live in here now sits in components/scroll-progress.tsx.
 const TestimonialsSection = () => {
-
-  // GLOBAL PAGE SCROLL (not section!)
-  const { scrollYProgress } = useScroll();
-
-  const progressWidth = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0%", "100%"]
-  );
-
   return (
-    <section className="bg-background py-24">
-
-      {/* Progress bar - desktop only */}
-      <div className="hidden md:block fixed top-0 left-0 right-0 h-1 bg-border z-50">
-        <motion.div
-          className="h-full bg-gradient-to-r from-primary via-purple-500 to-primary"
-          style={{ width: progressWidth }}
-        />
-      </div>
+    <section className="bg-background py-16 sm:py-24 md:py-32 lg:py-40">
 
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 mb-20">

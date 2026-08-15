@@ -77,7 +77,7 @@ const lifePhotos = [
 
 const LifePhotosMarquee = () => {
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-b from-background to-surface/50 overflow-hidden relative">
+    <section className="py-16 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-background to-surface/50 overflow-hidden relative">
       {/* Background accent */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />

@@ -13,11 +13,13 @@ import { Footer } from "@/components/footer"
 import { Navigation } from "@/components/navigation"
 import { ProjectsSection } from "@/components/projects"
 import { SmoothScroll } from "@/components/smooth-scroll"
+import { WorkSection } from "@/components/work"
+import { GitHubStats } from "@/components/GithubStats"
+import { ScrollProgress } from "@/components/scroll-progress"
 // import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
 import TechStackMarquee from "@/components/TechStackMarquee"
-import TestimonialsSection from "@/components/TestimonialsSection"
 import PhilosophySection from "@/components/PhilosophySection"
 // import { LifePath } from "@/components/LifePath"
 
@@ -59,12 +61,16 @@ export default function HomePage() {
           >
           {isLoaded && (
             <>
+              <ScrollProgress />
               <AppleStory />
               <AboutSection />
               <TechStackMarquee />
+              <WorkSection />
               <ProjectsSection />
+              <GitHubStats />
               <AchievementsSection />
-              <TestimonialsSection />
+              {/* Testimonials pulled until real, attributable quotes exist.
+                  The previous three were unattributed placeholder text. */}
               <AwardsSection />
               <PhilosophySection />
               <LifePhotosMarquee />

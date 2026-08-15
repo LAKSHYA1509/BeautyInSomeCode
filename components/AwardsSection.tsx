@@ -64,7 +64,7 @@ const AwardsSection = () => {
   return (
     <section
       ref={ref}
-      className="py-16 sm:py-24 md:py-32 bg-gradient-to-b from-background to-surface/50 relative overflow-hidden"
+      className="py-16 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-background to-surface/50 relative overflow-hidden"
     >
       {/* Decorative background */}
       <div className="absolute top-0 left-0 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />

@@ -7,30 +7,43 @@ import { useRef } from "react"
 const projects = [
   {
     title: "StreamLite",
-    description: "High-performance video streaming platform with adaptive bitrate and real-time analytics.",
-    impact: "Reduced buffering by 60% and increased user engagement",
-    tech: ["Java", "Spring Boot", "Kafka", "Redis", "PostgreSQL"],
-    github: "#",
-    live: "#",
+    description:
+      "Research-backed hybrid Live + VOD streaming backend built to hold up under high-concurrency workloads on deliberately resource-constrained infrastructure.",
+    impact: "Event-driven architecture separating control and data planes for fault isolation",
+    tech: ["Spring Boot", "Kafka", "Redis", "FFmpeg", "Spring Security"],
+    github: "https://github.com/LAKSHYA1509/StreamLite",
+    live: "",
     gradient: "from-[#8B7EC8]/20 to-[#4A6FA5]/10",
   },
   {
-    title: "Avasyu CRM",
-    description: "Enterprise customer relationship management system with AI-powered insights and automation.",
-    impact: "Streamlined operations for 500+ enterprise clients",
-    tech: ["Java", "Microservices", "React", "MongoDB", "Docker"],
-    github: "#",
-    live: "#",
+    title: "Aries",
+    description:
+      "gRPC-based distributed rate limiter delivered as a service, implementing the standard algorithm family behind one interface.",
+    impact: "Rate-limiting as infrastructure rather than per-service boilerplate",
+    tech: ["Java", "gRPC", "Distributed Systems"],
+    github: "https://github.com/LAKSHYA1509/Aries",
+    live: "",
     gradient: "from-[#4A6FA5]/20 to-[#C9A962]/10",
   },
   {
-    title: "CharPay",
-    description: "Secure payment gateway with multi-currency support and fraud detection.",
-    impact: "Processing $2M+ transactions with 99.99% uptime",
-    tech: ["Java", "Spring Security", "AWS", "MySQL", "RabbitMQ"],
-    github: "#",
-    live: "#",
+    title: "Doclite",
+    description:
+      "CLI tool that generates ready-made documentation scaffolding across five-plus project styles, so a new repo starts documented instead of promising to be.",
+    impact: "Turns the doc-writing step from a chore into a flag",
+    tech: ["Node.js", "JavaScript", "CLI"],
+    github: "https://github.com/LAKSHYA1509/Doclite",
+    live: "",
     gradient: "from-[#C9A962]/20 to-[#8B7EC8]/10",
+  },
+  {
+    title: "Avasyu",
+    description:
+      "Cloud-based CRM with contact management and email integration, secured with OAuth via Spring Security.",
+    impact: "End-to-end CRM built solo, from schema to auth to UI",
+    tech: ["Spring Boot", "Thymeleaf", "PostgreSQL", "Spring Security"],
+    github: "https://github.com/LAKSHYA1509/Avasyu",
+    live: "",
+    gradient: "from-[#8B7EC8]/20 to-[#C9A962]/10",
   },
 ]
 
@@ -113,21 +126,31 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             </div>
           </div>
 
+          {/* Only render a button when there is somewhere for it to go —
+              these used to be hardcoded "#" links that did nothing. */}
           <div className="flex gap-3">
-            <a
-              href={project.github}
-              className="p-2.5 sm:p-3 rounded-full border border-[#2A2A2A] text-[#888888] hover:text-[#E8E8E8] hover:border-[#888888] hover:bg-[#1A1A1A] transition-all duration-300"
-              aria-label={`View ${project.title} on GitHub`}
-            >
-              <Github className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a
-              href={project.live}
-              className="p-2.5 sm:p-3 rounded-full border border-[#2A2A2A] text-[#888888] hover:text-[#E8E8E8] hover:border-[#888888] hover:bg-[#1A1A1A] transition-all duration-300"
-              aria-label={`View ${project.title} live`}
-            >
-              <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 sm:p-3 rounded-full border border-[#2A2A2A] text-[#888888] hover:text-[#E8E8E8] hover:border-[#888888] hover:bg-[#1A1A1A] transition-all duration-300"
+                aria-label={`View ${project.title} on GitHub`}
+              >
+                <Github className="w-4 h-4 sm:w-5 sm:h-5" />
+              </a>
+            )}
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 sm:p-3 rounded-full border border-[#2A2A2A] text-[#888888] hover:text-[#E8E8E8] hover:border-[#888888] hover:bg-[#1A1A1A] transition-all duration-300"
+                aria-label={`View ${project.title} live`}
+              >
+                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
+              </a>
+            )}
           </div>
         </div>
       </div>

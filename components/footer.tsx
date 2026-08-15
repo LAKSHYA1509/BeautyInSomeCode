@@ -2,24 +2,25 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight, Github, Linkedin, Twitter, Mail } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
 import { PageViews } from "./page-views"
+import { EMAIL } from "@/lib/site"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   // Social Links Data
   const socials = [
-    { name: "Twitter", href: "#", icon: Twitter },
-    { name: "LinkedIn", href: "#", icon: Linkedin },
-    { name: "GitHub", href: "#", icon: Github },
-    { name: "Email", href: "mailto:hello@example.com", icon: Mail },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/lakshyabhardwaj1509/", icon: Linkedin },
+    { name: "GitHub", href: "https://github.com/LAKSHYA1509", icon: Github },
+    { name: "Email", href: `mailto:${EMAIL}`, icon: Mail },
   ]
 
   // Navigation Links Data
   const navLinks = [
     { name: "About", href: "#about" },
-    { name: "Work", href: "#projects" },
+    { name: "Work", href: "#work" },
+    { name: "Projects", href: "#projects" },
     { name: "Blog", href: "/blogs" },
     { name: "Contact", href: "#contact" },
   ]
@@ -52,8 +53,8 @@ export function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <Link 
-                  href="mailto:hello@lakshya.dev"
+                <Link
+                  href={`mailto:${EMAIL}`}
                   className="inline-flex items-center gap-2 text-lg border-b border-[#C9A962] pb-1 hover:text-[#C9A962] hover:border-transparent transition-all duration-300 group"
                 >
                   Start a conversation
@@ -85,6 +86,8 @@ export function Footer() {
                 <Link
                   key={idx}
                   href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="p-3 rounded-full border border-[#222] hover:bg-[#1A1A1A] hover:border-[#333] hover:text-[#C9A962] transition-all duration-300 group"
                   aria-label={social.name}
                 >

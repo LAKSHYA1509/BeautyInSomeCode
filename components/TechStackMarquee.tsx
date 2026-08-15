@@ -55,7 +55,7 @@ const TechStackMarquee = () => {
   };
 
   return (
-    <section className="py-8 bg-background border-y border-border overflow-hidden">
+    <section className="py-12 sm:py-16 bg-background border-y border-border overflow-hidden">
       <Marquee speed={40} direction="left">
         <div className="flex items-center gap-12">
           {techStack.map((tech, index) => (

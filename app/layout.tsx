@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist_Mono, Inter, Noto_Sans_Devanagari } from 'next/font/google'
 import React from "react"
+import { SITE } from '@/lib/site'
 import './globals.css'
 
 const inter = Inter({
@@ -19,14 +20,35 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 });
 
 export const metadata: Metadata = {
-  title: 'Lakshya Bhardwaj | Full Stack Developer',
-  description: 'Building systems that scale. Ideas that last. Java Full Stack Developer specializing in backend architecture & scalable systems.',
-  keywords: ['Full Stack Developer', 'Java Developer', 'Backend Architecture', 'Scalable Systems', 'Software Engineer'],
-  authors: [{ name: 'Lakshya Bhardwaj' }],
+  metadataBase: new URL(SITE.url),
+  title: 'Lakshya Bhardwaj | Backend & Platform Engineer',
+  description:
+    'Backend and platform engineer. I own a multi-tenant loyalty platform in production — NestJS, Postgres, Redis, and the CI that ships it.',
+  keywords: [
+    'Backend Engineer',
+    'Platform Engineer',
+    'NestJS',
+    'Spring Boot',
+    'Distributed Systems',
+    'CI/CD',
+    'Multi-tenant SaaS',
+    'Software Engineer',
+  ],
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'Lakshya Bhardwaj | Full Stack Developer',
-    description: 'Building systems that scale. Ideas that last.',
+    title: 'Lakshya Bhardwaj | Backend & Platform Engineer',
+    description: 'Systems that ship. Pipelines that hold.',
+    url: SITE.url,
+    siteName: SITE.name,
+    locale: 'en_IN',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lakshya Bhardwaj | Backend & Platform Engineer',
+    description: 'Systems that ship. Pipelines that hold.',
   },
 }
 
