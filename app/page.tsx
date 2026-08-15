@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Cursor from "@/components/ui/Cursor" 
 import { Hero } from "@/components/hero"
@@ -17,6 +17,7 @@ import { WorkSection } from "@/components/work"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { CreedSection } from "@/components/creed"
 import { BookSection } from "@/components/book"
+import { EducationSection } from "@/components/education"
 // import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
@@ -27,6 +28,18 @@ import PhilosophySection from "@/components/PhilosophySection"
 export default function HomePage() {
   // Master state to control visibility of Nav/Scroll
   const [isLoaded, setIsLoaded] = useState(false)
+
+  // The content below is now always mounted so the server sends real HTML —
+  // it's just transparent and inert until the hero finishes. Lock scrolling
+  // for that window so nobody can wander into the invisible page.
+  useEffect(() => {
+    if (isLoaded) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [isLoaded])
 
   return (
     <>
@@ -54,36 +67,43 @@ export default function HomePage() {
 {/* It calls setIsLoaded(true) when the "Expansion" is finished */}
 <Hero onComplete={() => setIsLoaded(true)} />
 
-  {/* Main Content fades in AFTER loading */}
+        {/*
+          Main content fades in after the hero, but is ALWAYS rendered.
+
+          This used to be wrapped in a second `{isLoaded && ...}` guard, which
+          meant the server sent a page containing nothing but "Open LAK SHYA" —
+          no headings, no projects, nothing for a crawler to read. The opacity
+          animation alone gives the same visual result while keeping the real
+          HTML in the response.
+        */}
         <motion.main
-        initial={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
           transition={{ duration: 1 }}
-          >
-          {isLoaded && (
-            <>
-              <ScrollProgress />
-              <AppleStory />
-              <AboutSection />
-              <TechStackMarquee />
-              <WorkSection />
-              <ProjectsSection />
-              {/* The 3D contribution graph already renders inside <AppleStory />
-                  as Contribution_Architecture.sys — don't add a second one. */}
-              <AchievementsSection />
-              {/* Testimonials pulled until real, attributable quotes exist.
-                  The previous three were unattributed placeholder text. */}
-              <AwardsSection />
-              <PhilosophySection />
-              <CreedSection />
-              <LifePhotosMarquee />
-              <BookSection />
-              <BlogSection />
-              {/* <LifePath /> */}
-              <ContactSection />
-              <Footer />
-            </>
-          )}
+          aria-hidden={!isLoaded}
+          className={isLoaded ? undefined : "pointer-events-none"}
+        >
+          <ScrollProgress />
+          <AppleStory />
+          <AboutSection />
+          <TechStackMarquee />
+          <WorkSection />
+          <ProjectsSection />
+          {/* The 3D contribution graph already renders inside <AppleStory />
+              as Contribution_Architecture.sys — don't add a second one. */}
+          <AchievementsSection />
+          {/* Testimonials pulled until real, attributable quotes exist.
+              The previous three were unattributed placeholder text. */}
+          <AwardsSection />
+          <EducationSection />
+          <PhilosophySection />
+          <CreedSection />
+          <LifePhotosMarquee />
+          <BookSection />
+          <BlogSection />
+          {/* <LifePath /> */}
+          <ContactSection />
+          <Footer />
         </motion.main>
       </>
     </SmoothScroll>
