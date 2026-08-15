@@ -1,21 +1,30 @@
 "use client"
 
+import cover from "@/public/book/fcuk-around-and-find-out-cover.jpg"
 import { motion, useInView } from "framer-motion"
+import { ArrowUpRight, BookOpen } from "lucide-react"
+import Image from "next/image"
 import { useRef } from "react"
 
 /**
- * Drop the real cover in here when it's available — set `coverSrc` to a path
- * under /public (or a Cloudinary URL) and the CSS stand-in below is replaced
- * automatically. Left null rather than shipping a broken <img>.
+ * Copy here is the book's own published back-cover text, not a paraphrase.
+ * Cover art is served from /public rather than hotlinked off Amazon's CDN —
+ * their image URLs carry size directives that change and would break silently.
  */
-const coverSrc: string | null = null
-
 const BOOK = {
   title: "Fcuk Around and Find Out",
-  subtitle: "A book about not waiting.",
-  blurb:
-    "A raw, unfiltered call to action — against waiting, against perfection, against needing permission or applause before you start. It argues for taking the risk, owning whatever follows, and learning from it either way. Direct, conversational, and mostly concerned with the difference between planning a life and living one.",
-  themes: ["Radical self-acceptance", "Owning consequences", "Boundaries", "Living authentically"],
+  subtitle: "Own Your Consequences Or Get Owned by Them",
+  hook: "The questions of “what-ifs” take a part of your present.",
+  paragraphs: [
+    "Taking risks can be daunting, unpredictable, and at times, downright uncomfortable. But it’s also essential for growth, learning, and discovering what we’re truly capable of.",
+    "This book is a raw, unfiltered exploration of the consequences that come with stepping outside your comfort zone and embracing the unknown.",
+    "It’s for those who are tired of playing it safe and are ready to face life’s challenges head-on. If you’re willing to bet on yourself, break the boundaries, and accept the repercussions, then it’s time to…",
+  ],
+  punchline: "fcuk around and find out.",
+  publisher: "OrangeBooks Publication",
+  isbn: "978-93-6554-497-8",
+  format: "Non-fiction · Paperback & eBook",
+  buyUrl: "https://www.amazon.in/dp/9365544971",
 }
 
 export function BookSection() {
@@ -45,52 +54,34 @@ export function BookSection() {
           </h2>
         </motion.div>
 
-        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,300px),1fr] md:gap-16">
+        <div className="grid items-start gap-10 md:grid-cols-[minmax(0,280px),1fr] md:gap-16">
           {/* Cover */}
-          <motion.div
+          <motion.a
+            href={BOOK.buyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${BOOK.title} on Amazon`}
             initial={{ opacity: 0, y: 40, rotate: -3 }}
             animate={isInView ? { opacity: 1, y: 0, rotate: -2 } : {}}
             transition={{ duration: 0.8, delay: 0.15 }}
             whileHover={{ rotate: 0, scale: 1.03 }}
-            className="mx-auto w-full max-w-[260px] md:mx-0 md:max-w-none"
+            className="group mx-auto block w-full max-w-[240px] md:mx-0 md:sticky md:top-24 md:max-w-none"
           >
-            {coverSrc ? (
-              <img
-                src={coverSrc}
-                alt={`Cover of ${BOOK.title}`}
-                className="w-full rounded-r-lg rounded-l-sm shadow-2xl shadow-black/60"
+            <div className="relative overflow-hidden rounded-r-lg rounded-l-sm shadow-2xl shadow-black/60 ring-1 ring-[#2A2A2A]">
+              <Image
+                src={cover}
+                alt={`Front cover of ${BOOK.title} by Lakshya Bhardwaj`}
+                placeholder="blur"
+                sizes="(max-width: 768px) 240px, 280px"
+                className="w-full"
               />
-            ) : (
-              <div className="relative aspect-[2/3] overflow-hidden rounded-r-lg rounded-l-sm border border-[#2A2A2A] bg-gradient-to-br from-[#161616] via-[#111111] to-[#0A0A0A] shadow-2xl shadow-black/60">
-                {/* Spine */}
-                <div className="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/80 to-transparent" />
-
-                <div className="flex h-full flex-col justify-between p-6 pl-8">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#666666]">
-                    Lakshya Bhardwaj
-                  </span>
-
-                  <div>
-                    <p className="text-3xl font-bold leading-[0.95] tracking-tight text-[#E8E8E8]">
-                      FCUK
-                      <br />
-                      AROUND
-                    </p>
-                    <div className="my-3 h-px w-12 bg-[#C9A962]" />
-                    <p className="text-3xl font-bold leading-[0.95] tracking-tight text-[#C9A962]">
-                      AND
-                      <br />
-                      FIND OUT
-                    </p>
-                  </div>
-
-                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#444444]">
-                    Non-fiction
-                  </span>
-                </div>
-              </div>
-            )}
-          </motion.div>
+              {/* Spine shading so it reads as a physical object, not a flat jpg */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/60 to-transparent"
+              />
+            </div>
+          </motion.a>
 
           {/* Copy */}
           <motion.div
@@ -98,25 +89,54 @@ export function BookSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <h3 className="mb-3 text-2xl font-medium text-[#E8E8E8] sm:text-3xl md:text-4xl">
+            <h3 className="mb-2 text-2xl font-medium text-[#E8E8E8] sm:text-3xl md:text-4xl">
               {BOOK.title}
             </h3>
             <p className="mb-8 font-mono text-sm text-[#8B7EC8]">{BOOK.subtitle}</p>
 
-            <p className="mb-10 max-w-2xl text-base leading-relaxed text-[#888888] sm:text-lg">
-              {BOOK.blurb}
+            <p className="mb-6 max-w-2xl text-lg font-light italic leading-snug text-[#C9A962] sm:text-xl">
+              {BOOK.hook}
             </p>
 
-            <div className="flex flex-wrap gap-2">
-              {BOOK.themes.map((theme) => (
-                <span
-                  key={theme}
-                  className="rounded-full border border-[#2A2A2A] bg-[#1A1A1A] px-3 py-1.5 text-[10px] font-medium text-[#888888] sm:text-xs"
-                >
-                  {theme}
-                </span>
+            <div className="mb-6 max-w-2xl space-y-4">
+              {BOOK.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="text-base leading-relaxed text-[#888888] sm:text-lg">
+                  {paragraph}
+                </p>
               ))}
             </div>
+
+            <p className="mb-10 text-xl font-medium text-[#E8E8E8] sm:text-2xl">
+              {BOOK.punchline}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href={BOOK.buyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-[#C9A962] px-6 py-3 text-sm font-medium text-[#0D0D0D] transition-all duration-300 hover:bg-[#E8E8E8] sm:text-base"
+              >
+                <BookOpen className="h-4 w-4" />
+                Read it on Amazon
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
+
+            <dl className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-[#1A1A1A] pt-6 font-mono text-xs text-[#666666] sm:text-sm">
+              <div>
+                <dt className="inline text-[#444444]">Publisher / </dt>
+                <dd className="inline">{BOOK.publisher}</dd>
+              </div>
+              <div>
+                <dt className="inline text-[#444444]">ISBN / </dt>
+                <dd className="inline">{BOOK.isbn}</dd>
+              </div>
+              <div>
+                <dt className="inline text-[#444444]">Format / </dt>
+                <dd className="inline">{BOOK.format}</dd>
+              </div>
+            </dl>
           </motion.div>
         </div>
       </div>
