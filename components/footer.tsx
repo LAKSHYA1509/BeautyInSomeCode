@@ -103,14 +103,17 @@ export function Footer() {
           
           {/* Massive Watermark Name */}
           <div className="relative overflow-hidden w-full md:w-auto">
-            <motion.h1 
+            {/* Decorative watermark — was an <h1>, which gave the page a
+                second top-level heading saying nothing but the first name. */}
+            <motion.div
+              aria-hidden
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-[12vw] md:text-[9rem] font-bold leading-[0.8] tracking-tighter text-[#161616] select-none"
             >
               LAKSHYA
-            </motion.h1>
+            </motion.div>
           </div>
 
           {/* Copyright Information */}

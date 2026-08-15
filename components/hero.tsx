@@ -170,9 +170,20 @@ export function Hero({ onComplete }: HeroProps) {
         >
           <motion.div layout className="flex items-center">
 
+            {/*
+              The page's single real <h1>. The giant type below is decorative —
+              it splits the name in half and cycles through words, which is a
+              lousy heading for a crawler or a screen reader. Those are spans
+              now, marked aria-hidden, and this carries the actual heading.
+            */}
+            <h1 className="sr-only">
+              Lakshya Bhardwaj — Backend &amp; Platform Engineer
+            </h1>
+
             {phase === "expanded" ? (
               <AnimatePresence mode="wait">
-                <motion.h1
+                <motion.span
+                  aria-hidden
                   key={words[wordIndex]}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -180,23 +191,24 @@ export function Hero({ onComplete }: HeroProps) {
                   transition={{ duration: 0.6 }}
                   // Size follows word length — at 18vw a ten-letter word like
                   // RELENTLESS measures wider than the viewport and clips.
-                  className={`font-bold leading-none tracking-tighter mix-blend-difference ${
+                  className={`block font-bold leading-none tracking-tighter mix-blend-difference ${
                     words[wordIndex].length >= 9
                       ? "text-[11vw] sm:text-[10vw] md:text-[9vw]"
                       : "text-[18vw] sm:text-[16vw] md:text-[14vw]"
                   }`}
                 >
                   {words[wordIndex]}
-                </motion.h1>
+                </motion.span>
               </AnimatePresence>
             ) : (
               <>
-                <motion.h1
+                <motion.span
+                  aria-hidden
                   layout
-                  className="font-bold mix-blend-difference text-6xl md:text-8xl"
+                  className="block font-bold mix-blend-difference text-6xl md:text-8xl"
                 >
                   LAK
-                </motion.h1>
+                </motion.span>
 
                 <motion.div
                   layout
@@ -204,12 +216,13 @@ export function Hero({ onComplete }: HeroProps) {
                   transition={{ duration: 1 }}
                 />
 
-                <motion.h1
+                <motion.span
+                  aria-hidden
                   layout
-                  className="font-bold mix-blend-difference text-6xl md:text-8xl"
+                  className="block font-bold mix-blend-difference text-6xl md:text-8xl"
                 >
                   SHYA
-                </motion.h1>
+                </motion.span>
               </>
             )}
 
