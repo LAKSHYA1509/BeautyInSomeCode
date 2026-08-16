@@ -15,12 +15,18 @@ export const SITE = {
   /**
    * Base for absolute canonical / OG / sitemap URLs.
    *
-   * Set NEXT_PUBLIC_SITE_URL in Vercel when the custom domain lands and every
-   * canonical, OG tag and sitemap entry follows automatically — no code change.
+   * The default is the real domain, not a preview URL. This matters more than
+   * it looks: the same site is also reachable on two vercel.app hostnames, and
+   * while this fell back to one of those, every canonical tag was telling
+   * Google that the throwaway URL was the authoritative copy and
+   * lakshyabhardwaj.com was the duplicate — exactly backwards.
+   *
+   * NEXT_PUBLIC_SITE_URL still overrides, which is what preview deployments
+   * would want.
    */
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://beauty-in-some-code-dr7y.vercel.app",
+    "https://lakshyabhardwaj.com",
   jobTitle: "Backend & Platform Engineer",
   book: {
     title: "Fcuk Around and Find Out",
