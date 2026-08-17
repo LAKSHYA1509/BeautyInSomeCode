@@ -5,9 +5,10 @@ import React from "react"
 import { motion, useInView } from "framer-motion"
 import { CodeIcon, ExternalLink, Github, Linkedin, Mail } from "lucide-react"
 import { useRef, useState } from "react"
+import { EMAIL } from "@/lib/site"
 
 const socialLinks = [
-  { name: "Email", href: "mailto:lakshyabhardwaj200315@gmail.com", icon: Mail },
+  { name: "Email", href: `mailto:${EMAIL}`, icon: Mail },
   { name: "GitHub", href: "https://github.com/LAKSHYA1509", icon: Github },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/lakshyabhardwaj1509/", icon: Linkedin },
   { name: "LeetCode", href: "https://leetcode.com/u/LakshyaBhardwaj1509/", icon: ExternalLink },
@@ -25,11 +26,33 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
+  const [fallbackHref, setFallbackHref] = useState("")
+
+  /**
+   * If the mail endpoint is down, hand the visitor a prefilled mailto instead
+   * of an apology. Someone who took the trouble to write a message should not
+   * lose it to a server-side misconfiguration they cannot see.
+   */
+  const buildMailto = () => {
+    const subject = `Portfolio enquiry from ${formState.name || "someone"}`
+    const body = [
+      formState.message,
+      "",
+      "—",
+      formState.name && `From: ${formState.name}`,
+      formState.email && `Reply to: ${formState.email}`,
+    ]
+      .filter(Boolean)
+      .join("\n")
+
+    return `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     setError("")
+    setFallbackHref("")
 
     try {
       const response = await fetch("/api/send-email", {
@@ -50,10 +73,12 @@ export function ContactSection() {
       setSubmitted(true)
       setFormState({ name: "", email: "", message: "" })
       setTimeout(() => setSubmitted(false), 3000)
-    } catch (err) {
+    } catch {
       setIsSubmitting(false)
-      setError(err instanceof Error ? err.message : "Failed to send message. Please try again.")
-      setTimeout(() => setError(""), 5000)
+      // Deliberately not surfacing the server's message — "Failed to send
+      // email" tells the visitor nothing they can act on.
+      setError("The form could not send that. Your message is safe below.")
+      setFallbackHref(buildMailto())
     }
   }
 
@@ -152,10 +177,19 @@ export function ContactSection() {
                 />
               </div>
 
-              {/* Error Message */}
+              {/* Failure is an offer, not an apology — the typed message survives. */}
               {error && (
-                <div className="p-3 sm:p-4 bg-red-900/20 border border-red-500/50 rounded-xl">
-                  <p className="text-red-400 text-xs sm:text-sm">{error}</p>
+                <div className="rounded-xl border border-[#C9A962]/40 bg-[#C9A962]/[0.07] p-3 sm:p-4">
+                  <p className="text-xs text-[#E8E8E8] sm:text-sm">{error}</p>
+                  {fallbackHref && (
+                    <a
+                      href={fallbackHref}
+                      className="mt-3 inline-flex items-center gap-2 border-b border-[#C9A962] pb-0.5 text-xs text-[#C9A962] transition-colors duration-300 hover:border-transparent hover:text-[#E8E8E8] sm:text-sm"
+                    >
+                      Send it from your email instead
+                      <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                    </a>
+                  )}
                 </div>
               )}
 

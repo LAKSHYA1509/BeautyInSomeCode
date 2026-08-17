@@ -19,6 +19,7 @@ import { CreedSection } from "@/components/creed"
 import { BookSection } from "@/components/book"
 import { EducationSection } from "@/components/education"
 import { SectionReveal } from "@/components/section-reveal"
+import { QuietHoursSection } from "@/components/quiet-hours"
 // import { ThemeToggle } from "@/components/theme-toggle"
 import AwardsSection from "@/components/AwardsSection"
 import LifePhotosMarquee from "@/components/LifePhotosMarquee"
@@ -94,6 +95,10 @@ export default function HomePage() {
           <TechStackMarquee />
           <SectionReveal><WorkSection /></SectionReveal>
           <SectionReveal><ProjectsSection /></SectionReveal>
+
+          {/* Straight after Projects, while someone is still in the mood to
+              click something. Buried near the footer it would never get opened. */}
+          <SectionReveal><QuietHoursSection /></SectionReveal>
 
           {/* The 3D contribution graph already renders inside <AppleStory />
               as Contribution_Architecture.sys — don't add a second one. */}
